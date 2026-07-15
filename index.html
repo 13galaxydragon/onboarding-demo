@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BANK NAME · Corporate Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141414; --deep:#0D0D0D; --surface:#1A1A1A; --border:#2A2A2A; --border-2:#3A3A3A;
+  --accent:#FF2A44; --accent-rgb:255,42,68; --accent-dim:#CC1F35; --accent-dim-rgb:204,31,53; --accent-soft:rgba(var(--accent-rgb),.12); --page:#120709;
+  --danger:#FF7A1A; --danger-2:#FF9E4D; --danger-soft:rgba(255,122,26,.08);
+  --warn:#FFB800; --warn-soft:rgba(255,184,0,.10);
+  --frozen:#9FB0D6; --frozen-soft:rgba(140,160,210,.14);
+  --t1:#FFFFFF; --t2:#CCCCCC; --t3:#AAAAAA; --t4:#888888; --t5:#666666; --t6:#555555;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ff:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--ff); color:var(--t1);
+  background:
+    radial-gradient(1100px 640px at 50% -12%, rgba(var(--accent-dim-rgb),.12), transparent 60%),
+    radial-gradient(900px 500px at 88% 110%, rgba(var(--accent-rgb),.05), transparent 60%),
+    var(--page);
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:40px 24px; gap:44px; flex-wrap:wrap;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- device ---------- */
+.stage{display:flex; flex-direction:column; align-items:center; gap:20px}
+.brandline{display:flex; align-items:center; gap:12px}
+.brandline .logo{width:36px;height:36px;border-radius:11px;background:var(--accent);color:var(--deep);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;
+  box-shadow:0 6px 22px rgba(var(--accent-rgb),.3)}
+.brandline .nm{font-size:14px;font-weight:700;letter-spacing:.2em}
+.brandline .tag{font-size:11px;font-weight:600;color:var(--accent-dim);padding:3px 9px;border:1px solid rgba(var(--accent-rgb),.25);border-radius:999px}
+
+.phone{
+  position:relative; width:378px; height:min(818px, 88vh); flex:0 0 auto;
+  background:#000; border-radius:46px; padding:11px;
+  box-shadow:0 0 0 2px #202020, 0 30px 80px rgba(0,0,0,.7), inset 0 0 3px rgba(255,255,255,.08);
+}
+.screen{
+  position:relative; width:100%; height:100%; border-radius:36px; overflow:hidden;
+  background:var(--bg); display:flex; flex-direction:column;
+}
+.notch{position:absolute; top:0; left:50%; transform:translateX(-50%); width:132px; height:26px;
+  background:#000; border-radius:0 0 16px 16px; z-index:60}
+.statusbar{height:44px; flex:0 0 auto; display:flex; align-items:flex-end; justify-content:space-between;
+  padding:0 26px 6px; font-size:13px; font-weight:600; color:#fff; z-index:40; position:relative}
+.statusbar .icons{display:flex; align-items:center; gap:6px}
+.statusbar svg{display:block}
+.viewport{flex:1 1 auto; overflow-y:auto; overflow-x:hidden; scrollbar-width:thin; scrollbar-color:#333 transparent}
+.viewport::-webkit-scrollbar{width:5px}
+.viewport::-webkit-scrollbar-thumb{background:#2c2c2c;border-radius:3px}
+.homebar{position:absolute; bottom:8px; left:50%; transform:translateX(-50%); width:130px; height:5px;
+  border-radius:3px; background:rgba(255,255,255,.32); z-index:50}
+
+.pad{padding:8px 24px 30px; min-height:100%; display:flex; flex-direction:column; box-sizing:border-box}
+.pad-center{padding:24px; min-height:100%; display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:center; box-sizing:border-box}
+
+/* ---------- primitives ---------- */
+h2.title{font-size:25px; font-weight:800; letter-spacing:-.01em; line-height:1.12; margin:0 0 8px}
+h2.title.sm{font-size:23px}
+p.sub{font-size:15px; color:var(--t3); margin:0 0 26px; line-height:1.45}
+.back{font-size:26px; color:var(--t3); background:none; border:none; cursor:pointer; width:34px; height:34px;
+  display:flex; align-items:center; margin:0 0 18px -6px; border-radius:10px; font-family:var(--ff)}
+.back:hover{color:#fff}
+.spring{flex:1 1 auto; min-height:14px}
+.stepwrap{display:flex; flex-direction:column; gap:9px; margin-bottom:26px}
+.steprow{display:flex; justify-content:space-between; font-size:13px}
+.steprow .a{color:var(--accent); font-weight:600}
+.steprow .b{color:var(--t5)}
+.bars{display:flex; gap:4px}
+.bars i{flex:1; height:4px; border-radius:2px; background:var(--border); transition:background .3s}
+.bars i.on{background:var(--accent)}
+
+.btn{height:54px; width:100%; border:none; border-radius:14px; background:var(--accent); color:var(--deep);
+  font-family:var(--ff); font-size:16px; font-weight:700; cursor:pointer; display:flex; align-items:center;
+  justify-content:center; gap:9px; transition:transform .12s, filter .2s, opacity .2s}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:scale(.985)}
+.btn.ghost{background:transparent; border:1px solid var(--border); color:var(--t2); font-weight:600}
+.btn.ghost:hover{border-color:#444; filter:none; background:rgba(255,255,255,.02)}
+.btn.line{background:transparent; border:1px solid var(--accent); color:var(--accent); font-weight:700}
+.btn.line:hover{background:var(--accent-soft); filter:none}
+.btn.sm{height:40px; font-size:13px; border-radius:10px}
+.btn:disabled{background:var(--surface); border:1px solid var(--border); color:var(--t6); cursor:not-allowed;
+  filter:none; transform:none}
+.btnstack{display:flex; flex-direction:column; gap:12px}
+
+.card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:20px}
+.field{margin-bottom:20px}
+.label{font-size:13px; color:var(--t3); margin-bottom:8px; font-weight:500; display:flex; justify-content:space-between}
+.label.ok{color:var(--accent); font-weight:600}
+.label.err{color:var(--danger); font-weight:600}
+.input-shell{height:54px; padding:0 16px; border-radius:14px; background:var(--surface); border:1px solid var(--border);
+  display:flex; align-items:center; gap:8px; transition:border-color .18s, box-shadow .18s}
+.input-shell.focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.input-shell.ok{border-color:var(--accent)}
+.input-shell.err{border-color:var(--danger)}
+.input-shell input{flex:1; background:none; border:none; outline:none; color:#fff; font-family:var(--ff);
+  font-size:15px; min-width:0}
+.input-shell input::placeholder{color:var(--t6)}
+.input-shell .prefix{font-size:15px; color:#fff; font-weight:600}
+.dot-status{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--deep);flex:0 0 auto}
+.dot-status.ok{background:var(--accent)}
+.dot-status.err{background:var(--danger)}
+.hint{font-size:12px; color:var(--t5); margin-top:8px}
+.hint.ok{color:var(--accent-dim)}
+.hint.err{color:var(--danger)}
+.hint.warn{color:var(--warn); font-weight:600}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--accent);
+  animation:ob-spin .8s linear infinite;flex:0 0 auto}
+
+.badge{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.badge.active{background:var(--accent-soft);color:var(--accent)}
+.badge.liq{background:rgba(255,122,26,.14);color:var(--danger-2)}
+.badge.frozen{background:var(--frozen-soft);color:var(--frozen)}
+.badge.warn{background:var(--warn-soft);color:var(--warn)}
+
+.kv{display:flex; justify-content:space-between; gap:16px; font-size:14px}
+.kv .k{color:var(--t4); font-size:13px}
+.kv .v{color:#fff; font-weight:600; text-align:right}
+.kv .v.mono{font-family:var(--mono); letter-spacing:.02em}
+.rule{height:1px; background:var(--border)}
+
+.notice{display:flex; gap:12px; padding:14px 16px; border-radius:12px; line-height:1.45; font-size:13px; color:var(--t2)}
+.notice .ic{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;color:var(--deep);flex:0 0 auto}
+.notice.warn{background:var(--warn-soft); border:1px solid rgba(255,184,0,.3)}
+.notice.warn .ic{background:var(--warn)}
+.notice.danger{background:var(--danger-soft); border:1px solid rgba(255,122,26,.3)}
+.notice.danger .ic{background:var(--danger)}
+.notice.frozen{background:var(--frozen-soft); border:1px solid rgba(140,160,210,.25)}
+.notice.info{background:var(--accent-soft); border:1px solid rgba(var(--accent-rgb),.2)}
+
+/* pin */
+.pins{display:flex; gap:9px; margin-bottom:22px}
+.pin{flex:1; height:60px; border-radius:12px; background:var(--surface); border:1px solid var(--border);
+  color:#fff; font-size:24px; font-weight:700; text-align:center; font-family:var(--ff); outline:none;
+  transition:border-color .15s, box-shadow .15s, background .15s}
+.pin:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.pin.err{border-color:var(--danger); background:var(--danger-soft); color:var(--danger-2)}
+.pins.shake{animation:ob-shake .5s ease}
+.resend{text-align:center; font-size:14px; color:var(--t3)}
+.resend b{color:#fff; font-weight:600}
+.otp-actions{display:flex; flex-direction:column; gap:14px; align-items:center}
+.linkbtn{background:none;border:none;font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;color:var(--accent)}
+.linkbtn:disabled{color:var(--t6);cursor:default}
+.linkbtn:hover:not(:disabled){text-decoration:underline}
+
+/* strength meter */
+.meter{display:flex; gap:5px; margin-top:8px}
+.meter i{flex:1; height:4px; border-radius:2px; background:var(--border); transition:background .2s}
+.reqs{display:flex; flex-direction:column; gap:8px; margin:14px 0 18px}
+.req{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--t5); transition:color .2s}
+.req.met{color:var(--t2)}
+.req .rc{width:16px;height:16px;border-radius:50%;border:1.5px solid #444;display:flex;align-items:center;
+  justify-content:center;font-size:9px;font-weight:900;flex:0 0 auto;transition:all .2s}
+.req.met .rc{background:var(--accent);border-color:var(--accent);color:var(--deep)}
+
+/* welcome art */
+.rings{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.rings .glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:520px;height:520px;
+  border-radius:50%;background:radial-gradient(circle,rgba(var(--accent-dim-rgb),.22),rgba(var(--accent-dim-rgb),0) 62%)}
+.rings .r{position:absolute;left:50%;transform:translateX(-50%);border-radius:50%}
+.wlogo{width:60px;height:60px;border-radius:18px;background:var(--accent);display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:30px;color:var(--deep);box-shadow:0 8px 30px rgba(var(--accent-rgb),.35)}
+.diamond{width:132px;height:132px;border-radius:50%;background:linear-gradient(145deg, rgba(var(--accent-rgb),.12), var(--deep));
+  border:1px solid rgba(var(--accent-rgb),.25);display:flex;align-items:center;justify-content:center}
+.diamond .in{width:70px;height:70px;border-radius:18px;border:2px solid var(--accent);transform:rotate(45deg);
+  display:flex;align-items:center;justify-content:center}
+.diamond .in b{width:26px;height:26px;border-radius:6px;background:var(--accent);display:block}
+.langs{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.lang{padding:7px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--t3);
+  font-size:13px;font-weight:600;cursor:pointer}
+.lang.on{border-color:var(--accent);color:var(--accent)}
+
+/* checklist rows (loading) */
+.tasks{width:100%;display:flex;flex-direction:column;gap:14px}
+.task{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:var(--surface);
+  border:1px solid var(--border);font-size:15px;color:#fff;font-weight:500}
+.task.active{border-color:var(--accent)}
+.task.pending{opacity:.55}
+.tick{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;
+  justify-content:center;color:var(--deep);font-size:14px;font-weight:900;flex:0 0 auto}
+.tspin{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--border);border-top-color:var(--accent);
+  animation:ob-spin .8s linear infinite;flex:0 0 auto}
+.tempty{width:26px;height:26px;border-radius:50%;border:2px solid #444;flex:0 0 auto}
+
+.orb{position:relative;width:160px;height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:38px}
+.orb .ring{position:absolute;width:120px;height:120px;border-radius:50%;border:1px solid rgba(var(--accent-rgb),.4);
+  animation:ob-ring 2.4s ease-out infinite}
+.orb .core{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--accent-dim));
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:44px;color:var(--deep);
+  animation:ob-pulse 2s ease-in-out infinite;box-shadow:0 0 50px rgba(var(--accent-rgb),.5)}
+
+.circle-badge{width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:26px}
+.circle-badge.ok{background:var(--accent-soft);border:1px solid rgba(var(--accent-rgb),.3)}
+.circle-badge.err{background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.35)}
+.circle-badge.warn{background:var(--warn-soft);border:1px solid rgba(255,184,0,.35)}
+.circle-badge .inner{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:30px;font-weight:900;color:var(--deep)}
+.circle-badge .inner.ok{background:var(--accent)}
+.circle-badge .inner.err{background:var(--danger)}
+.rounded-badge{width:100px;height:100px;border-radius:26px;display:flex;align-items:center;justify-content:center;
+  font-size:44px;margin-bottom:26px}
+.rounded-badge.err{background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.35)}
+
+/* MYID scan */
+.facewrap{width:170px;height:170px;border-radius:50%;border:2px dashed rgba(var(--accent-rgb),.5);display:flex;
+  align-items:center;justify-content:center;margin-bottom:28px;position:relative}
+.facewrap.warn{border-color:rgba(255,184,0,.5)}
+.facewrap .face{width:120px;height:120px;border-radius:50%;background:var(--accent-soft);display:flex;
+  align-items:center;justify-content:center;font-size:56px}
+.scanline{position:absolute;left:14px;right:14px;height:2px;background:var(--accent);border-radius:2px;
+  box-shadow:0 0 12px var(--accent);top:18px;animation:ob-scan 2s ease-in-out infinite}
+
+/* docs */
+.doc{padding:16px;border-radius:14px;background:var(--surface);border:1px solid var(--border);transition:border-color .2s}
+.doc.signed{border-color:var(--accent)}
+.doc.ready{border-color:rgba(var(--accent-rgb),.45)}
+.doc.failed{border-color:var(--danger);background:var(--danger-soft)}
+.doc .row{display:flex;align-items:center;gap:12px}
+.doc .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex:0 0 auto;font-weight:900}
+.doc .ico.unread{background:var(--deep);border:1px solid var(--border);color:var(--t5)}
+.doc .ico.ready{background:var(--deep);border:1px solid var(--accent);color:var(--accent)}
+.doc .ico.signed{background:var(--accent);color:var(--deep)}
+.doc .ico.failed{background:rgba(255,122,26,.15);color:var(--danger-2)}
+.doc .nm{font-size:15px;font-weight:600;color:#fff}
+.doc .st{font-size:12px;margin-top:1px}
+.doc .st.ok{color:var(--accent-dim)}
+.doc .st.mut{color:var(--t4)}
+.doc .st.err{color:var(--danger-2)}
+.doc .acts{display:flex;gap:10px;margin-top:14px}
+
+/* pipeline dots (ECP) */
+.pipe{display:flex;align-items:center;justify-content:space-between;margin:6px 0}
+.pnode{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1}
+.pnode .n{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px}
+.pnode .n.on{background:var(--accent);color:var(--deep)}
+.pnode .n.off{background:var(--surface);border:1px solid var(--border);color:var(--t4)}
+.pnode span{font-size:12px;font-weight:600}
+.pnode span.on{color:#fff}
+.pnode span.off{color:var(--t4)}
+.pline{flex:.6;height:2px;background:var(--border);margin-bottom:22px}
+.progbar{width:100%;height:6px;border-radius:3px;background:var(--surface);overflow:hidden}
+.progbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));border-radius:3px;transition:width .3s}
+
+/* confetti */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;top:-14px;border-radius:2px;animation:ob-confetti linear infinite}
+
+/* bottom sheet + modal */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:70;animation:ob-fade .2s ease}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--border);
+  border-radius:24px 24px 0 0;padding:12px 24px 30px;z-index:80;animation:ob-up .28s cubic-bezier(.2,.8,.2,1)}
+.grabber{width:40px;height:4px;border-radius:2px;background:var(--border-2);margin:0 auto 20px}
+.opt{display:flex;align-items:center;gap:14px;padding:18px;border-radius:14px;background:var(--deep);
+  border:1px solid var(--border);cursor:pointer;transition:border-color .15s}
+.opt:hover{border-color:#3c3c3c}
+.opt .oi{width:40px;height:40px;border-radius:11px;background:var(--accent-soft);display:flex;align-items:center;
+  justify-content:center;color:var(--accent);font-size:18px;font-weight:800;flex:0 0 auto}
+.opt .ot{font-size:15px;font-weight:600;color:#fff}
+.opt .od{font-size:13px;color:var(--t4)}
+.opt .oa{color:var(--t5);font-size:20px}
+.modal{position:absolute;left:16px;right:16px;bottom:20px;background:var(--bg);border:1px solid var(--border);
+  border-radius:24px;padding:26px 22px;z-index:80;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:ob-up .3s cubic-bezier(.2,.8,.2,1)}
+
+/* simulated SMS */
+#sms{position:absolute;top:52px;left:12px;right:12px;z-index:120;display:flex;gap:12px;align-items:center;
+  padding:12px 14px;border-radius:16px;background:rgba(30,30,30,.86);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 34px rgba(0,0,0,.5);
+  transform:translateY(-160%);transition:transform .4s cubic-bezier(.2,.9,.2,1)}
+#sms.in{transform:translateY(0)}
+#sms .sic{width:34px;height:34px;border-radius:9px;background:var(--accent);color:var(--deep);display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:16px;flex:0 0 auto}
+#sms .stitle{font-size:12px;font-weight:700;color:#fff;display:flex;justify-content:space-between}
+#sms .stitle .tm{color:var(--t4);font-weight:500}
+#sms .sbody{font-size:13px;color:var(--t2);margin-top:2px}
+#sms .code{color:var(--accent);font-weight:700;font-family:var(--mono)}
+
+/* dashboard (behind activation) */
+.dash{padding:24px;min-height:100%;box-sizing:border-box}
+.dash .greet{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.dash .av{width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--border)}
+.dash .balcard{background:linear-gradient(150deg, rgba(var(--accent-rgb),.10), var(--surface));border:1px solid var(--border);border-radius:18px;
+  padding:22px;margin:20px 0 16px}
+.tile{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
+
+/* side notes panel */
+.notes{width:300px;flex:0 0 auto;color:var(--t3);font-size:13px;line-height:1.55}
+.notes h3{font-size:12px;letter-spacing:.14em;color:var(--t5);font-weight:700;margin:0 0 14px;text-transform:uppercase}
+.notes .grp{background:rgba(255,255,255,.02);border:1px solid #1e1e1e;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.notes .grp h4{font-size:13px;color:#fff;font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.notes code{font-family:var(--mono);font-size:12px;color:var(--accent);background:rgba(var(--accent-rgb),.07);padding:1px 6px;border-radius:5px}
+.notes ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.notes li{display:flex;gap:9px}
+.notes li .b{color:var(--t5);flex:0 0 auto}
+.restart{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);
+  color:var(--t2);font-family:var(--ff);font-size:13px;font-weight:600;padding:9px 16px;border-radius:11px;cursor:pointer}
+.restart:hover{border-color:var(--accent);color:var(--accent)}
+
+
+/* theme picker */
+.sw-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--t5);font-weight:700;margin-bottom:8px}
+.sw-row{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);transition:transform .12s,border-color .15s}
+.sw:hover{transform:scale(1.14)}
+.sw.on{border-color:#fff;transform:scale(1.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 0 0 3px rgba(255,255,255,.12)}
+
+@keyframes ob-spin{to{transform:rotate(360deg)}}
+@keyframes ob-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.7}}
+@keyframes ob-ring{0%{transform:scale(.8);opacity:.8}100%{transform:scale(1.8);opacity:0}}
+@keyframes ob-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes ob-draw{to{stroke-dashoffset:0}}
+@keyframes ob-blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes ob-confetti{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(760px) rotate(560deg);opacity:0}}
+@keyframes ob-scan{0%,100%{top:18px}50%{top:130px}}
+@keyframes ob-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes ob-fade{from{opacity:0}to{opacity:1}}
+.caret{display:inline-block;width:2px;height:18px;background:var(--accent);margin-left:2px;vertical-align:middle;animation:ob-blink 1s step-end infinite}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important}
+}
+@media (max-width: 1140px){ .notes{display:none} }
+@media (max-width: 460px){
+  body{padding:0; gap:0; align-items:stretch}
+  .stage{gap:0; width:100%}
+  .brandline{display:none}
+  .phone{width:100%; height:100vh; height:100dvh; border-radius:0; padding:0; box-shadow:none; background:var(--bg)}
+  .screen{border-radius:0}
+  .notch{display:none}
+  .homebar{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="brandline">
+    <div class="logo">B</div>
+    <div class="nm">BANK NAME</div>
+    <div class="tag">BUSINESS · PROTOTYPE</div>
+  </div>
+
+  <div class="phone">
+    <div class="screen">
+      <div class="notch"></div>
+      <div class="statusbar">
+        <span id="clock">9:41</span>
+        <span class="icons">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="#fff"/><rect x="4.5" y="5" width="3" height="7" rx="1" fill="#fff"/><rect x="9" y="2.5" width="3" height="9.5" rx="1" fill="#fff"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#fff"/></svg>
+          <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.2 1 4.2a9 9 0 0 1 14 0Z" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M8 11.2 4 7.2a5.6 5.6 0 0 1 8 0Z" fill="#fff"/></svg>
+          <svg width="26" height="13" viewBox="0 0 26 13"><rect x="1" y="1" width="21" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="3" y="3" width="16" height="7" rx="1.5" fill="#fff"/><rect x="23" y="4.5" width="2" height="4" rx="1" fill="#fff" fill-opacity=".5"/></svg>
+        </span>
+      </div>
+      <div class="viewport" id="app"></div>
+      <div id="sms">
+        <div class="sic">B</div>
+        <div style="flex:1;min-width:0">
+          <div class="stitle"><span>BANK NAME</span><span class="tm">now</span></div>
+          <div class="sbody" id="sms-body"></div>
+        </div>
+      </div>
+      <div class="homebar"></div>
+    </div>
+  </div>
+
+  <button class="restart" onclick="restart()">↺ Restart demo</button>
+</div>
+
+<aside class="notes">
+  <h3>Prototype notes</h3>
+  <div class="grp" id="theme-grp">
+    <h4>\u25b8 Theme \u00b7 pick 2 colors</h4>
+    <div class="sw-label">Primary (accent)</div>
+    <div class="sw-row" id="sw-primary"></div>
+    <div class="sw-label" style="margin-top:12px">Secondary (background)</div>
+    <div class="sw-row" id="sw-secondary"></div>
+  </div>
+  <div class="grp">
+    <h4>▸ How to walk the flow</h4>
+    Tap <b style="color:#fff">Become a Client</b> and follow each step. Verification codes arrive as a
+    simulated SMS banner at the top of the phone — the code is shown there.
+  </div>
+  <div class="grp">
+    <h4>▸ Test INN / PINFL <span style="color:var(--t5);font-weight:500">(step 1)</span></h4>
+    <ul>
+      <li><span class="b">→</span><span><code>305512418</code> active company (happy path)</span></li>
+      <li><span class="b">→</span><span><code>301220907</code> liquidated → blocked</span></li>
+      <li><span class="b">→</span><span><code>111111111</code> already a client → sign in</span></li>
+      <li><span class="b">→</span><span><code>000000000</code> not found in registry</span></li>
+      <li><span class="b">→</span><span>any other 9 digits → active</span></li>
+    </ul>
+  </div>
+  <div class="grp">
+    <h4>▸ Codes &amp; rules</h4>
+    <ul>
+      <li><span class="b">→</span><span>OTP code is <code>123456</code> · 3 attempts · 60s resend</span></li>
+      <li><span class="b">→</span><span>Taken logins: <code>admin</code>, <code>test</code>, <code>bobur.k</code></span></li>
+      <li><span class="b">→</span><span>Password needs 8+ chars, upper, digit, symbol</span></li>
+      <li><span class="b">→</span><span>MYID confirms the registry director, then verifies</span></li>
+    </ul>
+  </div>
+</aside>
+
+<script>
+"use strict";
+/* ============================================================
+   BANK NAME — Corporate onboarding prototype
+   Single-file vanilla JS state machine + screen router.
+   ============================================================ */
+
+const app = document.getElementById('app');
+const smsEl = document.getElementById('sms');
+const smsBody = document.getElementById('sms-body');
+
+let timers = [];
+const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
+const clearTimers = () => { timers.forEach(clearTimeout); timers.forEach(clearInterval); timers = []; };
+
+const DIRECTOR = "Karimov Bobur Alisherovich";
+const TAKEN_LOGINS = ["admin","root","test","user","demo","bobur.k","altyn","director"];
+const CODE = "123456";
+
+let S = {};
+function freshState(){
+  S = {
+    screen:'welcome', lang:'UZ', history:[],
+    phone:'', inn:'',
+    company:null,
+    otp:{ attempts:3, cooldown:0, value:'' },
+    myid:{ attempts:3 },
+    login:'', loginState:'idle', pass:'', confirm:'',
+    account:null,
+    ecp:{ attempts:3, issued:false },
+    docs:[
+      {id:'d1', name:'Banking Services Agreement', state:'ready'},
+      {id:'d2', name:'Tariff Agreement', state:'unread'},
+      {id:'d3', name:'Personal Data Consent', state:'unread'},
+    ],
+    signedTime:{},
+    loginPass:'',
+  };
+}
+freshState();
+
+/* ---- live clock in the status bar ---- */
+(function tick(){
+  const d = new Date();
+  document.getElementById('clock').textContent =
+    d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
+  setTimeout(tick, 20000);
+})();
+
+/* ---- helpers ---- */
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function stepBars(active, total){
+  let h = '';
+  for(let i=0;i<total;i++) h += `<i class="${i<active?'on':''}"></i>`;
+  return `<div class="bars">${h}</div>`;
+}
+function stepHead(n, label){
+  return `<div class="stepwrap">
+    <div class="steprow"><span class="a">Step ${n} of 9</span><span class="b">${label}</span></div>
+    ${stepBars(n,9)}
+  </div>`;
+}
+function fmtPhone(digits){
+  const d = digits.replace(/\D/g,'').slice(0,9);
+  const p=[d.slice(0,2),d.slice(2,5),d.slice(5,7),d.slice(7,9)].filter(Boolean);
+  return p.join(' ');
+}
+function genAccount(){
+  const rnd = () => String(Math.floor(1000+Math.random()*9000));
+  return `2020 8600 •••• ${rnd()}`;
+}
+function showSms(text, codeHtml){
+  smsBody.innerHTML = codeHtml ? `${text} <span class="code">${codeHtml}</span>` : text;
+  smsEl.classList.add('in');
+  later(()=> smsEl.classList.remove('in'), 5200);
+}
+
+/* ---- navigation ---- */
+function go(name, opts={}){
+  clearTimers();
+  smsEl.classList.remove('in');
+  if(!opts.replace && !opts.back) S.history.push(S.screen);
+  S.screen = name;
+  render();
+}
+function back(){
+  const prev = S.history.pop();
+  if(prev){ clearTimers(); smsEl.classList.remove('in'); S.screen = prev; render(); }
+}
+function restart(){ freshState(); go('welcome', {replace:true}); }
+function render(){
+  const scr = screens[S.screen];
+  app.innerHTML = scr.html();
+  app.scrollTop = 0;
+  if(scr.mount) scr.mount();
+}
+
+/* ============================================================
+   SCREENS
+   ============================================================ */
+const screens = {};
+
+/* ---- 1. Welcome ---- */
+screens.welcome = {
+  html(){ return `
+    <div style="position:relative;height:100%">
+      <div class="rings">
+        <div class="glow"></div>
+        <div class="r" style="top:60px;width:300px;height:300px;border:1px solid rgba(var(--accent-rgb),.12)"></div>
+        <div class="r" style="top:20px;width:420px;height:420px;border:1px solid rgba(var(--accent-rgb),.07)"></div>
+      </div>
+      <div class="pad" style="position:relative">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:24px">
+          <div class="wlogo">B</div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:.22em">BANK NAME</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px">
+          <div class="diamond"><div class="in"><b></b></div></div>
+          <h2 style="font-size:30px;font-weight:800;line-height:1.1;margin:8px 0 0;letter-spacing:-.02em">Open your business account</h2>
+          <p style="font-size:16px;color:var(--t3);margin:0">Fast, secure, fully digital</p>
+        </div>
+        <div class="btnstack">
+          <button class="btn" data-act="start">Become a Client</button>
+          <div style="text-align:center;font-size:14px;color:var(--t2)">Already a client?
+            <button class="linkbtn" data-act="signin" style="font-size:14px">Sign in</button></div>
+          <div class="langs">
+            ${['UZ','RU','EN'].map(l=>`<div class="lang ${S.lang===l?'on':''}" data-lang="${l}">${l}</div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=start]').onclick = ()=> go('identify');
+    app.querySelector('[data-act=signin]').onclick = ()=> { S.history=[]; go('login',{replace:true}); };
+    app.querySelectorAll('[data-lang]').forEach(el=> el.onclick=()=>{ S.lang=el.dataset.lang; render(); });
+  }
+};
+
+/* ---- 2. Identification ---- */
+screens.identify = {
+  html(){ return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      ${stepHead(1,'Identification')}
+      <h2 class="title sm">Enter your details</h2>
+      <p class="sub">We'll verify your company against the state registry.</p>
+
+      <div class="field">
+        <div class="label" id="lb-phone">Phone number</div>
+        <div style="display:flex;gap:10px">
+          <div class="input-shell" style="width:auto;padding:0 14px;cursor:default"><span class="prefix">+998</span><span style="color:var(--t5);font-size:10px">▾</span></div>
+          <div class="input-shell" id="sh-phone" style="flex:1">
+            <input id="in-phone" inputmode="numeric" autocomplete="off" placeholder="90 123 45 67" maxlength="12">
+            <div class="dot-status" id="st-phone" style="display:none"></div>
+          </div>
+        </div>
+        <div class="hint" id="hn-phone">Uzbek mobile number</div>
+      </div>
+
+      <div class="field">
+        <div class="label" id="lb-inn">INN / PINFL</div>
+        <div class="input-shell" id="sh-inn">
+          <input id="in-inn" inputmode="numeric" autocomplete="off" placeholder="Enter INN or PINFL" maxlength="14">
+          <div class="dot-status" id="st-inn" style="display:none"></div>
+        </div>
+        <div class="hint" id="hn-inn">9 digits (INN) or 14 digits (PINFL)</div>
+      </div>
+
+      <div class="spring"></div>
+      <button class="btn" id="continue" disabled>Continue</button>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=back]').onclick = back;
+    const phone = app.querySelector('#in-phone');
+    const inn   = app.querySelector('#in-inn');
+    const btn   = app.querySelector('#continue');
+    phone.value = S.phone; inn.value = S.inn;
+
+    const shP = app.querySelector('#sh-phone'), stP = app.querySelector('#st-phone'),
+          lbP = app.querySelector('#lb-phone'), hnP = app.querySelector('#hn-phone');
+    const shI = app.querySelector('#sh-inn'), stI = app.querySelector('#st-inn'),
+          lbI = app.querySelector('#lb-inn'), hnI = app.querySelector('#hn-inn');
+
+    function validate(){
+      // phone — neutral while typing, green tick at exactly 9 digits (can't overshoot)
+      const pd = phone.value.replace(/\D/g,'').slice(0,9);
+      phone.value = fmtPhone(pd);
+      S.phone = pd;
+      const pOk = pd.length===9;
+      shP.classList.toggle('ok', pOk); shP.classList.remove('err');
+      lbP.className = 'label' + (pOk?' ok':'');
+      stP.style.display = pOk? 'flex':'none';
+      stP.className = 'dot-status ok'; stP.textContent = '✓';
+      hnP.className = 'hint'; hnP.textContent = 'Uzbek mobile number';
+
+      // inn — green at 9 or 14; red only in the invalid 10–13 range; neutral otherwise
+      const id = inn.value.replace(/\D/g,'').slice(0,14);
+      inn.value = id; S.inn = id;
+      const iOk = id.length===9 || id.length===14;
+      const iErr = id.length>=10 && id.length<=13;
+      shI.classList.toggle('ok', iOk); shI.classList.toggle('err', iErr);
+      lbI.className = 'label' + (iOk?' ok':iErr?' err':'');
+      stI.style.display = (iOk||iErr)? 'flex':'none';
+      stI.className = 'dot-status ' + (iOk?'ok':'err'); stI.textContent = iOk?'✓':'!';
+      hnI.className = 'hint' + (iErr?' err':'');
+      hnI.textContent = iErr ? 'INN is 9 digits, PINFL is 14' : '9 digits (INN) or 14 digits (PINFL)';
+
+      btn.disabled = !(pOk && iOk);
+    }
+    phone.addEventListener('input', validate);
+    inn.addEventListener('input', validate);
+    [ [phone,shP],[inn,shI] ].forEach(([el,sh])=>{
+      el.addEventListener('focus',()=>sh.classList.add('focus'));
+      el.addEventListener('blur',()=>sh.classList.remove('focus'));
+    });
+    validate();
+
+    btn.onclick = ()=>{
+      // duplicate checks (BR-R-001/002)
+      if(S.inn === '111111111'){ go('dupInn'); return; }
+      // rate-limit ok -> send OTP
+      screens.otp.purpose = 'onboarding';
+      S.otp = { attempts:3, cooldown:60, value:'' };
+      go('otp');
+    };
+  }
+};
+
+/* ---- duplicate INN (already a client) ---- */
+screens.dupInn = {
+  html(){ return `
+    <div class="pad-center">
+      <div class="circle-badge warn"><div class="inner" style="background:var(--warn)">i</div></div>
+      <h2 class="title">You're already with us</h2>
+      <p class="sub">A company with INN <b style="color:#fff">${esc(S.inn)}</b> already has an BANK NAME account.
+        You can sign in instead.</p>
+      <div style="width:100%" class="btnstack">
+        <button class="btn" data-act="signin">Sign in</button>
+        <button class="btn ghost" data-act="back">Use a different INN</button>
+      </div>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=signin]').onclick=()=>{ S.history=[]; go('login',{replace:true}); };
+    app.querySelector('[data-act=back]').onclick=back;
+  }
+};
+
+/* ---- 3. OTP ---- */
+screens.otp = {
+  purpose:'onboarding',
+  html(){
+    const cells = Array.from({length:6}).map((_,i)=>
+      `<input class="pin" data-i="${i}" inputmode="numeric" maxlength="1" autocomplete="off">`).join('');
+    return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      ${stepHead(2,'Verification')}
+      <h2 class="title sm">Enter verification code</h2>
+      <p class="sub">Code sent to +998 ${fmtPhone(S.phone)||'90 123 45 67'}</p>
+      <div class="pins" id="pins">${cells}</div>
+      <div id="otp-msg"></div>
+      <div class="resend" id="resend-line">Resend in <b id="cd">1:00</b></div>
+      <div class="spring"></div>
+      <div class="otp-actions">
+        <button class="linkbtn" id="resend" disabled>Resend code</button>
+        <button class="linkbtn" id="change">Change number</button>
+      </div>
+    </div>`;
+  },
+  mount(){
+    const backBtn = app.querySelector('[data-act=back]');
+    if(backBtn) backBtn.onclick = back;
+    const change = app.querySelector('#change');
+    if(change) change.onclick = ()=> back();
+
+    const pins = [...app.querySelectorAll('.pin')];
+    const pinsWrap = app.querySelector('#pins');
+    const msg = app.querySelector('#otp-msg');
+    const resend = app.querySelector('#resend');
+    const cd = app.querySelector('#cd');
+    const resendLine = app.querySelector('#resend-line');
+
+    // send the SMS
+    later(()=> showSms('Your verification code is', CODE), 600);
+
+    // cooldown timer
+    let left = S.otp.cooldown || 60;
+    function paintCd(){
+      const m = Math.floor(left/60), s = String(left%60).padStart(2,'0');
+      if(cd) cd.textContent = `${m}:${s}`;
+    }
+    paintCd();
+    const iv = setInterval(()=>{
+      left--; S.otp.cooldown = left; paintCd();
+      if(left<=0){
+        clearInterval(iv);
+        if(resendLine) resendLine.innerHTML = `Didn't get it?`;
+        if(resend) resend.disabled = false;
+      }
+    },1000);
+    timers.push(iv);
+
+    if(resend) resend.onclick = ()=>{
+      if(resend.disabled) return;
+      resend.disabled = true; left = 60; S.otp.cooldown = 60;
+      if(resendLine) resendLine.innerHTML = `Resend in <b id="cd">1:00</b>`;
+      go(S.screen,{replace:true}); // re-arm whichever OTP screen is active (re-sends SMS, restarts timer)
+    };
+
+    pins[0].focus();
+    function value(){ return pins.map(p=>p.value).join(''); }
+
+    pins.forEach((p,i)=>{
+      p.addEventListener('input',()=>{
+        p.value = p.value.replace(/\D/g,'').slice(0,1);
+        pins.forEach(x=>x.classList.remove('err'));
+        msg.innerHTML='';
+        if(p.value && i<5) pins[i+1].focus();
+        if(value().length===6) verify();
+      });
+      p.addEventListener('keydown',e=>{
+        if(e.key==='Backspace' && !p.value && i>0){ pins[i-1].focus(); pins[i-1].value=''; }
+      });
+      p.addEventListener('paste',e=>{
+        e.preventDefault();
+        const t=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,6);
+        t.split('').forEach((c,j)=>{ if(pins[j]) pins[j].value=c; });
+        (pins[Math.min(t.length,5)]||pins[5]).focus();
+        if(value().length===6) verify();
+      });
+    });
+
+    function verify(){
+      const v = value();
+      if(v === CODE){
+        pins.forEach(p=>{ p.style.borderColor='var(--accent)'; p.disabled=true; });
+        later(()=> screens.otp.purpose==='login' ? go('activateChecking') : go('checking'), 380);
+        return;
+      }
+      // wrong
+      S.otp.attempts--;
+      pins.forEach(p=>p.classList.add('err'));
+      pinsWrap.classList.remove('shake'); void pinsWrap.offsetWidth; pinsWrap.classList.add('shake');
+      if(S.otp.attempts<=0){ later(()=> go('otpBlocked',{replace:true}), 520); return; }
+      msg.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-top:-8px">
+        <div class="hint err" style="margin:0"><b>!</b> Invalid code</div>
+        <div class="hint warn" style="margin:0">${S.otp.attempts} attempt${S.otp.attempts>1?'s':''} left</div></div>`;
+      later(()=>{ pins.forEach(p=>{p.value='';p.classList.remove('err')}); pins[0].focus(); }, 620);
+    }
+  }
+};
+
+/* ---- OTP blocked (terminal) ---- */
+screens.otpBlocked = {
+  html(){ return `
+    <div class="pad-center">
+      <div class="circle-badge err"><div class="inner err">✕</div></div>
+      <h2 class="title">Session blocked</h2>
+      <p class="sub">Maximum verification attempts reached. For your security, this session has been blocked.</p>
+      <p style="font-size:14px;color:var(--t5);margin:0 0 40px">Try again in 24 hours or contact support.</p>
+      <div style="width:100%" class="btnstack">
+        <button class="btn" data-act="support">Contact support</button>
+        <button class="btn ghost" data-act="restart">Back to start</button>
+      </div>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=support]').onclick = ()=> toast('Support chat is not part of this prototype');
+    app.querySelector('[data-act=restart]').onclick = restart;
+  }
+};
+
+/* ---- 4. Data check (loading) ---- */
+screens.checking = {
+  html(){ return `
+    <div class="pad-center">
+      <div class="orb"><div class="ring"></div><div class="ring" style="animation-delay:1.2s"></div><div class="core">B</div></div>
+      <h2 class="title sm">Verifying your company data…</h2>
+      <p class="sub" style="margin-bottom:40px">This may take a few seconds</p>
+      <div class="tasks">
+        <div class="task"><div class="tick">✓</div>Phone verified</div>
+        <div class="task active" id="t2"><div class="tspin"></div>Checking company registry</div>
+        <div class="task pending" id="t3"><div class="tempty"></div>Preparing your profile</div>
+      </div>
+    </div>`; },
+  mount(){
+    // resolve company from INN, then branch
+    later(()=>{
+      const c = resolveCompany(S.inn);
+      const t2 = app.querySelector('#t2'), t3 = app.querySelector('#t3');
+      if(t2){ t2.querySelector('.tspin').outerHTML = '<div class="tick">✓</div>'; }
+      if(t3){ t3.classList.remove('pending'); t3.classList.add('active');
+              t3.querySelector('.tempty').outerHTML = '<div class="tspin"></div>'; }
+      later(()=>{
+        if(c.result === 'notfound'){ go('notFound',{replace:true}); }
+        else { S.company = c; go('company',{replace:true}); }
+      }, 900);
+    }, 1700);
+  }
+};
+
+/* ---- company not found ---- */
+screens.notFound = {
+  html(){ return `
+    <div class="pad-center">
+      <div class="rounded-badge err">⚠</div>
+      <h2 class="title">Company not found</h2>
+      <p class="sub">No company with INN <b style="color:#fff">${esc(S.inn)}</b> was found in the state registry.
+        Check the number or contact support.</p>
+      <div style="width:100%" class="btnstack">
+        <button class="btn" data-act="edit">Change INN</button>
+        <button class="btn ghost" data-act="support">Contact support</button>
+      </div>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=edit]').onclick = ()=>{ S.history=['welcome']; go('identify',{replace:true}); };
+    app.querySelector('[data-act=support]').onclick = ()=> toast('Support chat is not part of this prototype');
+  }
+};
+
+/* ---- 5. Company confirmation ---- */
+screens.company = {
+  html(){
+    const c = S.company;
+    if(c.result === 'liquidated'){
+      return `
+      <div class="pad">
+        <button class="back" data-act="back">‹</button>
+        ${stepHead(3,'Company data')}
+        <h2 class="title sm">Verify your company details</h2>
+        <div class="card" style="border-color:rgba(255,122,26,.35);display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:20px;font-weight:800">${esc(c.name)}</span>
+            <span class="badge liq">● Liquidated</span></div>
+          <div class="rule"></div>
+          <div class="kv"><span class="k">INN</span><span class="v mono">${esc(c.innFmt)}</span></div>
+          <div class="kv"><span class="k">Registered</span><span class="v">${esc(c.reg)}</span></div>
+          <div class="kv"><span class="k">Liquidated</span><span class="v" style="color:var(--danger-2)">${esc(c.liq)}</span></div>
+        </div>
+        <div class="notice danger" style="margin-top:16px"><div class="ic">!</div>
+          <div>This company is liquidated and cannot open a new account. Contact support if this is an error.</div></div>
+        <div class="spring"></div>
+        <div class="btnstack">
+          <button class="btn" disabled>Details are correct</button>
+          <button class="btn line" data-act="support">Contact support</button>
+        </div>
+      </div>`;
+    }
+    return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      ${stepHead(3,'Company data')}
+      <h2 class="title sm">Verify your company details</h2>
+      <div class="card" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:20px;font-weight:800">${esc(c.name)}</span>
+          <span class="badge active">● Active</span></div>
+        <div class="rule"></div>
+        <div class="kv"><span class="k">INN</span><span class="v mono">${esc(c.innFmt)}</span></div>
+        <div class="kv"><span class="k">Legal address</span><span class="v" style="font-weight:400;color:var(--t2)">${esc(c.addr)}</span></div>
+        <div class="kv"><span class="k">Registered</span><span class="v">${esc(c.reg)}</span></div>
+        <div class="kv"><span class="k">Director</span><span class="v">Karimov B. ••••••</span></div>
+      </div>
+      <div class="spring"></div>
+      <div class="btnstack">
+        <button class="btn" data-act="ok">Details are correct</button>
+        <button class="btn ghost" data-act="wrong">Something is wrong</button>
+      </div>
+    </div>`;
+  },
+  mount(){
+    app.querySelector('[data-act=back]').onclick = back;
+    const ok = app.querySelector('[data-act=ok]');
+    const wrong = app.querySelector('[data-act=wrong]');
+    const support = app.querySelector('[data-act=support]');
+    if(ok) ok.onclick = ()=> go('myidPrep');
+    if(support) support.onclick = ()=> toast('Support chat is not part of this prototype');
+    if(wrong) wrong.onclick = ()=> openDisputeSheet();
+  }
+};
+
+function openDisputeSheet(){
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+    <div class="dim" id="dim"></div>
+    <div class="sheet" id="sheet">
+      <div class="grabber"></div>
+      <h3 style="font-size:20px;font-weight:800;margin:0 0 6px">What's wrong?</h3>
+      <p style="font-size:14px;color:var(--t3);margin:0 0 22px">Tell us what needs to be fixed.</p>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="opt" data-o="inn"><div class="oi">#</div>
+          <div style="flex:1"><div class="ot">Correct INN</div><div class="od">Re-enter your identification number</div></div>
+          <span class="oa">›</span></div>
+        <div class="opt" data-o="support"><div class="oi">✉</div>
+          <div style="flex:1"><div class="ot">Contact support</div><div class="od">Chat with our onboarding team</div></div>
+          <span class="oa">›</span></div>
+      </div>
+    </div>`;
+  app.querySelector('.pad').appendChild(wrap);
+  const close = ()=> wrap.remove();
+  wrap.querySelector('#dim').onclick = close;
+  wrap.querySelector('[data-o=inn]').onclick = ()=>{ close(); S.history=['welcome']; go('identify',{replace:true}); };
+  wrap.querySelector('[data-o=support]').onclick = ()=>{ close(); toast('Support chat is not part of this prototype'); };
+}
+
+/* ---- 6. MYID: prepare ---- */
+screens.myidPrep = {
+  html(){ return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      ${stepHead(4,'Identity')}
+      <h2 class="title sm">Confirm you are the director</h2>
+      <div class="card" style="padding:16px 18px;margin-bottom:20px">
+        <div style="font-size:12px;color:var(--t4);margin-bottom:4px">Our records show the director is</div>
+        <div style="font-size:16px;font-weight:700">${DIRECTOR}</div>
+      </div>
+      <div class="notice info" style="margin-bottom:22px">
+        <div style="padding:6px 10px;border-radius:8px;background:var(--accent);color:var(--deep);font-weight:900;font-size:14px">MYID</div>
+        <div style="align-self:center">We use MYID biometric verification to confirm your identity.</div>
+      </div>
+      <div style="font-size:13px;color:var(--t4);font-weight:600;margin-bottom:14px">WHAT TO PREPARE</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="task" style="padding:16px"><div style="width:38px;height:38px;border-radius:10px;background:var(--deep);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto">☺</div>Your face for a quick scan</div>
+        <div class="task" style="padding:16px"><div style="width:38px;height:38px;border-radius:10px;background:var(--deep);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 auto">🪪</div>ID document (passport)</div>
+      </div>
+      <div class="spring"></div>
+      <button class="btn" data-act="start">Start MYID Verification</button>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=back]').onclick = back;
+    app.querySelector('[data-act=start]').onclick = ()=> go('myidScan');
+  }
+};
+
+/* ---- MYID scan (animated) ---- */
+screens.myidScan = {
+  html(){ return `
+    <div class="pad-center">
+      <div style="padding:6px 12px;border-radius:8px;background:var(--accent);color:var(--deep);font-weight:900;font-size:13px;margin-bottom:28px">MYID</div>
+      <div class="facewrap"><div class="scanline"></div><div class="face">☺</div></div>
+      <h2 class="title sm" id="scan-t">Hold still…</h2>
+      <p class="sub" id="scan-s">Position your face inside the circle</p>
+      <div class="progbar" style="max-width:220px"><i id="scan-p" style="width:8%"></i></div>
+    </div>`; },
+  mount(){
+    let pct = 8;
+    const bar = app.querySelector('#scan-p');
+    const t = app.querySelector('#scan-t'), s = app.querySelector('#scan-s');
+    const iv = setInterval(()=>{
+      pct = Math.min(100, pct + Math.random()*16+6);
+      bar.style.width = pct+'%';
+      if(pct>45){ t.textContent='Matching your identity…'; s.textContent='Comparing with the registry director'; }
+      if(pct>=100){
+        clearInterval(iv);
+        later(()=> go('myidDone',{replace:true}), 500);
+      }
+    }, 380);
+    timers.push(iv);
+  }
+};
+
+/* ---- MYID success -> auto continue ---- */
+screens.myidDone = {
+  html(){ return `
+    <div class="pad-center">
+      <div class="circle-badge ok"><div class="inner ok">✓</div></div>
+      <h2 class="title">Identity verified</h2>
+      <p class="sub">You're confirmed as the director of ${esc(S.company?S.company.name:'the company')}.</p>
+      <div class="card" style="width:100%;padding:14px 16px;text-align:left;margin-bottom:34px">
+        <div style="font-size:12px;color:var(--t4);margin-bottom:3px">Verified name</div>
+        <div style="font-size:15px;font-weight:700">${DIRECTOR}</div>
+      </div>
+      <button class="btn" style="width:100%" data-act="next">Continue</button>
+    </div>`; },
+  mount(){ app.querySelector('[data-act=next]').onclick = ()=> go('credentials'); }
+};
+
+/* ---- 7. Credentials ---- */
+screens.credentials = {
+  html(){ return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      ${stepHead(5,'Credentials')}
+      <h2 class="title sm">Create your credentials</h2>
+
+      <div class="field" style="margin-bottom:16px">
+        <div class="label" id="lb-login">Login</div>
+        <div class="input-shell" id="sh-login">
+          <input id="in-login" autocomplete="off" placeholder="Choose a login" maxlength="30">
+          <div id="login-ind"></div>
+        </div>
+        <div class="hint" id="hn-login">Letters, numbers and dots</div>
+      </div>
+
+      <div class="field" style="margin-bottom:12px">
+        <div class="label">Password
+          <button class="linkbtn" id="tg-pass" style="font-size:12px;color:var(--t4)">Show</button></div>
+        <div class="input-shell" id="sh-pass">
+          <input id="in-pass" type="password" autocomplete="new-password" placeholder="Create a password">
+        </div>
+        <div class="meter" id="meter"><i></i><i></i><i></i><i></i></div>
+        <div class="hint" id="hn-pass" style="margin-top:6px">&nbsp;</div>
+      </div>
+
+      <div class="reqs" id="reqs">
+        <div class="req" data-r="len"><div class="rc"></div>At least 8 characters</div>
+        <div class="req" data-r="upper"><div class="rc"></div>One uppercase letter</div>
+        <div class="req" data-r="digit"><div class="rc"></div>One number</div>
+        <div class="req" data-r="special"><div class="rc"></div>One special character</div>
+      </div>
+
+      <div class="field" style="margin-bottom:8px">
+        <div class="label" id="lb-conf">Confirm password
+          <button class="linkbtn" id="tg-conf" style="font-size:12px;color:var(--t4)">Show</button></div>
+        <div class="input-shell" id="sh-conf">
+          <input id="in-conf" type="password" autocomplete="new-password" placeholder="Repeat your password">
+          <div class="dot-status" id="st-conf" style="display:none"></div>
+        </div>
+        <div class="hint" id="hn-conf" style="margin-top:6px">&nbsp;</div>
+      </div>
+
+      <div class="spring"></div>
+      <button class="btn" id="continue" disabled>Continue</button>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=back]').onclick = back;
+    const login = app.querySelector('#in-login'), pass = app.querySelector('#in-pass'), conf = app.querySelector('#in-conf');
+    const btn = app.querySelector('#continue');
+    const ind = app.querySelector('#login-ind');
+    const shL = app.querySelector('#sh-login'), lbL=app.querySelector('#lb-login'), hnL=app.querySelector('#hn-login');
+    const meter=[...app.querySelectorAll('#meter i')], hnP=app.querySelector('#hn-pass');
+    const reqs=app.querySelector('#reqs');
+    const shC=app.querySelector('#sh-conf'), stC=app.querySelector('#st-conf'), lbC=app.querySelector('#lb-conf'), hnC=app.querySelector('#hn-conf');
+    login.value=S.login; pass.value=S.pass; conf.value=S.confirm;
+
+    // show/hide toggles
+    const bind = (btnEl, input)=>{ btnEl.onclick=()=>{ const t=input.type==='password'; input.type=t?'text':'password'; btnEl.textContent=t?'Hide':'Show'; }; };
+    bind(app.querySelector('#tg-pass'), pass);
+    bind(app.querySelector('#tg-conf'), conf);
+    [ [login,shL],[pass,app.querySelector('#sh-pass')],[conf,shC] ].forEach(([el,sh])=>{
+      el.addEventListener('focus',()=>sh.classList.add('focus'));
+      el.addEventListener('blur',()=>sh.classList.remove('focus'));
+    });
+
+    let loginTimer=null;
+    function checkLogin(){
+      const v = login.value.trim();
+      S.login=v;
+      shL.classList.remove('ok','err'); lbL.className='label';
+      if(!v){ ind.innerHTML=''; hnL.className='hint'; hnL.textContent='Letters, numbers and dots'; S.loginState='idle'; update(); return; }
+      ind.innerHTML='<div class="spin"></div>'; hnL.className='hint'; hnL.textContent='Checking availability…'; S.loginState='checking'; update();
+      clearTimeout(loginTimer);
+      loginTimer=setTimeout(()=>{
+        const taken = TAKEN_LOGINS.includes(v.toLowerCase());
+        if(taken){
+          S.loginState='taken';
+          ind.innerHTML='<div class="dot-status err">✕</div>'; shL.classList.add('err'); lbL.className='label err';
+          hnL.className='hint err'; hnL.textContent='This login is already taken';
+        } else {
+          S.loginState='ok';
+          ind.innerHTML='<div class="dot-status ok">✓</div>'; shL.classList.add('ok'); lbL.className='label ok';
+          hnL.className='hint ok'; hnL.textContent='Available';
+        }
+        update();
+      }, 550);
+      timers.push(loginTimer);
+    }
+
+    function score(p){
+      return { len:p.length>=8, upper:/[A-Z]/.test(p), digit:/[0-9]/.test(p), special:/[^A-Za-z0-9]/.test(p) };
+    }
+    function paintPass(){
+      const p=pass.value; S.pass=p;
+      const s=score(p); const n=Object.values(s).filter(Boolean).length;
+      const colors=['','var(--danger)','var(--warn)','var(--accent-dim)','var(--accent)'];
+      meter.forEach((seg,i)=> seg.style.background = i<n? colors[n] : 'var(--border)');
+      reqs.querySelectorAll('.req').forEach(r=> r.classList.toggle('met', s[r.dataset.r]));
+      const labels=['','Weak password','Medium strength','Good password','Strong password'];
+      hnP.className='hint '+(n>=4?'ok':n>=2?'warn':'err').replace('warn','warn');
+      hnP.style.color = n>=4?'var(--accent)':n>=3?'var(--accent-dim)':n>=2?'var(--warn)':'var(--danger)';
+      hnP.textContent = p? labels[n] : '\u00A0';
+      app.querySelector('#sh-pass').classList.toggle('err', p.length>0 && n<4);
+    }
+    function paintConf(){
+      const c=conf.value; S.confirm=c; const p=pass.value;
+      shC.classList.remove('ok','err'); lbC.className='label'; stC.style.display=c?'flex':'none';
+      hnC.textContent='\u00A0'; hnC.className='hint';
+      if(!c) { update(); return; }
+      if(c===p && p){ shC.classList.add('ok'); lbC.className='label ok'; stC.className='dot-status ok'; stC.textContent='✓'; }
+      else { shC.classList.add('err'); lbC.className='label err'; stC.className='dot-status err'; stC.textContent='✕';
+             hnC.className='hint err'; hnC.textContent="Passwords don't match"; }
+      update();
+    }
+    function passStrong(){ const s=score(pass.value); return Object.values(s).every(Boolean); }
+    function update(){
+      btn.disabled = !(S.loginState==='ok' && passStrong() && conf.value && conf.value===pass.value);
+    }
+
+    login.addEventListener('input', checkLogin);
+    pass.addEventListener('input', ()=>{ paintPass(); paintConf(); });
+    conf.addEventListener('input', paintConf);
+    if(S.login) checkLogin();
+    paintPass(); if(S.confirm) paintConf(); update();
+
+    btn.onclick = ()=>{
+      S.account = { number: genAccount(), status:'FROZEN' };
+      go('account');
+    };
+  }
+};
+
+/* ---- 8. Account created (frozen) ---- */
+screens.account = {
+  html(){ return `
+    <div class="pad">
+      <div class="bars" style="margin-bottom:40px">${[1,1,1,1,1,1,0,0,0].map(v=>`<i class="${v?'on':''}"></i>`).join('')}</div>
+      <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div class="circle-badge ok" style="margin-bottom:26px">
+          <svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="var(--accent)"/>
+            <path d="M16 29 L25 38 L41 20" fill="none" stroke="#0D0D0D" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="48" stroke-dashoffset="48" style="animation:ob-draw .7s ease-out .2s forwards"/></svg>
+        </div>
+        <h2 class="title" style="margin-bottom:30px">Your account has been created</h2>
+      </div>
+      <div class="card" style="padding:22px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-size:13px;color:var(--t4)">Account number</span>
+          <span class="badge frozen">❄ FROZEN</span></div>
+        <div style="font-size:22px;font-weight:700;font-family:var(--mono);letter-spacing:.02em;margin-bottom:18px">${esc(S.account.number)}</div>
+        <div class="rule" style="margin-bottom:16px"></div>
+        <div style="display:flex;align-items:center;gap:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
+          <span style="font-size:13px;color:var(--t2)">Next: issue your digital signature</span></div>
+      </div>
+      <div class="notice frozen" style="margin-top:16px"><span style="font-size:18px">❄</span>
+        <div style="align-self:center">Your account will be activated after your first login and document signing.</div></div>
+      <div class="spring"></div>
+      <button class="btn" data-act="next">Continue to Digital Signature</button>
+    </div>`; },
+  mount(){ app.querySelector('[data-act=next]').onclick = ()=> go('ecpIntro'); }
+};
+
+/* ---- 9. ECP intro ---- */
+screens.ecpIntro = {
+  html(){ return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      <div class="bars" style="margin-bottom:24px">${[1,1,1,1,1,1,1,0,0].map(v=>`<i class="${v?'on':''}"></i>`).join('')}</div>
+      <h2 class="title sm">Issue your digital signature</h2>
+      <div class="card" style="margin-bottom:22px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:11px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:20px">🔑</div>
+          <span style="font-size:16px;font-weight:700">What is an ECP?</span></div>
+        <p style="font-size:14px;color:var(--t3);margin:0;line-height:1.5">An electronic digital signature (ECP) lets you legally sign banking documents online — it's required to activate your account.</p>
+      </div>
+      <div class="pipe">
+        <div class="pnode"><div class="n on">1</div><span class="on">Generate</span></div>
+        <div class="pline"></div>
+        <div class="pnode"><div class="n off">2</div><span class="off">Verify</span></div>
+        <div class="pline"></div>
+        <div class="pnode"><div class="n off">3</div><span class="off">Confirm</span></div>
+      </div>
+      <div class="spring"></div>
+      <button class="btn" data-act="issue">Issue Digital Signature</button>
+    </div>`; },
+  mount(){
+    app.querySelector('[data-act=back]').onclick = back;
+    app.querySelector('[data-act=issue]').onclick = ()=> go('ecpGen',{replace:true});
+  }
+};
+
+/* ---- ECP generating ---- */
+screens.ecpGen = {
+  html(){ return `
+    <div class="pad-center">
+      <div style="position:relative;width:130px;height:130px;display:flex;align-items:center;justify-content:center;margin-bottom:36px">
+        <div style="position:absolute;width:130px;height:130px;border-radius:50%;border:3px solid var(--surface);border-top-color:var(--accent);animation:ob-spin 1s linear infinite"></div>
+        <div style="font-size:44px">🔑</div>
+      </div>
+      <h2 class="title sm">Generating your signature…</h2>
+      <p class="sub">Creating secure key pair. Don't close the app.</p>
+      <div class="progbar"><i id="p" style="width:6%"></i></div>
+      <div class="hint" id="lbl" style="margin-top:10px">6% — creating key</div>
+    </div>`; },
+  mount(){
+    let pct=6; const bar=app.querySelector('#p'), lbl=app.querySelector('#lbl');
+    const iv=setInterval(()=>{
+      pct=Math.min(100,pct+Math.random()*14+7); bar.style.width=pct+'%';
+      lbl.textContent = `${Math.round(pct)}% — ${pct<55?'creating key':pct<90?'verifying key':'finalizing'}`;
+      if(pct>=100){ clearInterval(iv); S.ecp.issued=true; later(()=> go('ecpDone',{replace:true}), 450); }
+    },420);
+    timers.push(iv);
+  }
+};
+
+/* ---- ECP issued ---- */
+screens.ecpDone = {
+  html(){
+    const d = new Date(); const until = `${String(d.getDate()).padStart(2,'0')} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]} ${d.getFullYear()+1}`;
+    return `
+    <div class="pad-center">
+      <div class="circle-badge ok"><div class="inner ok">✓</div></div>
+      <h2 class="title">ECP issued successfully</h2>
+      <p class="sub">Your digital signature is ready. You can now sign documents.</p>
+      <div class="card" style="width:100%;padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:34px">
+        <span style="font-size:13px;color:var(--t4)">Valid until</span><span style="font-size:14px;font-weight:600">${until}</span></div>
+      <button class="btn" style="width:100%" data-act="next">Continue</button>
+    </div>`; },
+  mount(){ app.querySelector('[data-act=next]').onclick = ()=> go('documents'); }
+};
+
+/* ---- 10. Documents ---- */
+screens.documents = {
+  html(){
+    const signed = S.docs.filter(d=>d.state==='signed').length;
+    const all = signed===S.docs.length;
+    return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      <div class="bars" style="margin-bottom:24px">${[1,1,1,1,1,1,1,1,0].map(v=>`<i class="${v?'on':''}"></i>`).join('')}</div>
+      <h2 class="title sm" style="margin-bottom:6px">Sign required documents</h2>
+      <p class="sub" id="count" style="margin-bottom:22px;${all?'color:var(--accent-dim);font-weight:600':''}">${all?'All documents signed':signed+' of '+S.docs.length+' signed'}</p>
+      <div style="display:flex;flex-direction:column;gap:12px" id="doclist">
+        ${S.docs.map(docRow).join('')}
+      </div>
+      <div class="spring"></div>
+      <button class="btn" id="complete" ${all?'':'disabled'}>Complete Signing</button>
+    </div>`;
+  },
+  mount(){
+    app.querySelector('[data-act=back]').onclick = back;
+    wireDocs();
+    const complete = app.querySelector('#complete');
+    complete.onclick = ()=>{ if(S.docs.every(d=>d.state==='signed')) go('success'); };
+  }
+};
+function docRow(d){
+  const t = S.signedTime[d.id]||'';
+  if(d.state==='signed') return `
+    <div class="doc signed" data-id="${d.id}"><div class="row">
+      <div class="ico signed">✓</div>
+      <div style="flex:1"><div class="nm">${d.name}</div><div class="st ok">Signed • ${t}</div></div></div></div>`;
+  if(d.state==='failed') return `
+    <div class="doc failed" data-id="${d.id}">
+      <div class="row" style="margin-bottom:12px"><div class="ico failed">!</div>
+        <div style="flex:1"><div class="nm">${d.name}</div><div class="st err">Signing failed — ECP timed out</div></div></div>
+      <button class="btn sm" data-do="sign"><span>↻</span> Retry signing</button></div>`;
+  if(d.state==='ready') return `
+    <div class="doc ready" data-id="${d.id}">
+      <div class="row" style="margin-bottom:14px"><div class="ico ready">📄</div>
+        <div style="flex:1"><div class="nm">${d.name}</div><div class="st mut">Read • ready to sign</div></div></div>
+      <div class="acts"><button class="btn ghost sm" data-do="preview" style="flex:1">Preview</button>
+        <button class="btn sm" data-do="sign" style="flex:1">Sign</button></div></div>`;
+  // unread
+  return `
+    <div class="doc" data-id="${d.id}" style="opacity:.8">
+      <div class="row" style="margin-bottom:14px"><div class="ico unread">📄</div>
+        <div style="flex:1"><div class="nm" style="color:var(--t2)">${d.name}</div><div class="st" style="color:var(--t5)">Not read yet</div></div></div>
+      <div class="acts"><button class="btn ghost sm" data-do="preview" style="flex:1">Preview</button>
+        <button class="btn sm" data-do="sign" style="flex:1" disabled>Sign</button></div></div>`;
+}
+function wireDocs(){
+  app.querySelectorAll('.doc').forEach(node=>{
+    const id = node.dataset.id;
+    const d = S.docs.find(x=>x.id===id);
+    node.querySelectorAll('[data-do]').forEach(b=>{
+      b.onclick = ()=>{
+        if(b.dataset.do==='preview'){ openDocPreview(d); }
+        if(b.dataset.do==='sign'){ signDoc(d, node); }
+      };
+    });
+  });
+}
+function refreshDocs(){
+  const list = app.querySelector('#doclist');
+  list.innerHTML = S.docs.map(docRow).join('');
+  wireDocs();
+  const signed = S.docs.filter(d=>d.state==='signed').length;
+  const all = signed===S.docs.length;
+  const cnt = app.querySelector('#count');
+  cnt.textContent = all?'All documents signed':signed+' of '+S.docs.length+' signed';
+  cnt.style.cssText = all?'margin-bottom:22px;color:var(--accent-dim);font-weight:600':'margin-bottom:22px';
+  app.querySelector('#complete').disabled = !all;
+}
+function signDoc(d, node){
+  // apply ECP with a brief spinner on the sign button
+  const btn = node.querySelector('[data-do=sign]');
+  if(btn){ btn.disabled=true; btn.innerHTML='<div class="spin" style="border-top-color:var(--deep)"></div>'; }
+  later(()=>{
+    const now = new Date();
+    S.signedTime[d.id] = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    d.state='signed';
+    // unlock the next unread doc -> becomes ready
+    const nextUnread = S.docs.find(x=>x.state==='unread');
+    if(nextUnread) nextUnread.state='ready';
+    refreshDocs();
+  }, 900);
+}
+function openDocPreview(d){
+  const wrap = document.createElement('div');
+  const body = {
+    'Banking Services Agreement':'This Agreement sets out the terms on which BANK NAME provides corporate banking services to the Client, including account maintenance, payments and remote banking access.',
+    'Tariff Agreement':'Schedule of fees and commissions applicable to the corporate account: account maintenance, domestic and international transfers, cash operations and card services.',
+    'Personal Data Consent':'The Client consents to the processing of personal data by BANK NAME for the purposes of onboarding, identification (KYC/AML) and provision of banking services, in line with applicable law.'
+  }[d.name] || 'Document preview.';
+  wrap.innerHTML = `
+    <div class="dim"></div>
+    <div class="sheet" style="max-height:78%;display:flex;flex-direction:column">
+      <div class="grabber"></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+        <div class="ico ready" style="width:40px;height:40px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px">📄</div>
+        <div style="font-size:17px;font-weight:800">${d.name}</div></div>
+      <div style="flex:1;overflow-y:auto;background:var(--deep);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px">
+        ${body}<br><br>1. Definitions and interpretation.<br>2. Scope of services.<br>3. Client obligations.<br>4. Fees and settlement.<br>5. Liability and termination.<br><br><span style="color:var(--t5)">— End of preview —</span></div>
+      <button class="btn" data-do="signnow">I've read it — Sign</button>
+    </div>`;
+  const pad = app.querySelector('.pad'); pad.appendChild(wrap);
+  const close=()=>wrap.remove();
+  wrap.querySelector('.dim').onclick=()=>{ if(d.state==='unread') d.state='ready'; refreshDocs(); close(); };
+  wrap.querySelector('[data-do=signnow]').onclick=()=>{
+    if(d.state==='unread') d.state='ready';
+    close(); refreshDocs();
+    const node = app.querySelector(`.doc[data-id="${d.id}"]`);
+    if(node) signDoc(d, node);
+  };
+}
+
+/* ---- 11. Success ---- */
+screens.success = {
+  html(){
+    const confetti = Array.from({length:16}).map((_,i)=>{
+      const l = (5 + i*6)%96, c=['var(--accent)','#FFFFFF','var(--accent-dim)'][i%3];
+      const round = i%2? '50%':'2px'; const w = 6+(i%3)*2, h = i%2?w:12;
+      const dur = (2.8+ (i%5)*0.24).toFixed(2), del=(i%7*0.28).toFixed(2);
+      return `<i style="left:${l}%;width:${w}px;height:${h}px;background:${c};border-radius:${round};animation-duration:${dur}s;animation-delay:${del}s"></i>`;
+    }).join('');
+    return `
+    <div style="position:relative;height:100%">
+      <div class="confetti">${confetti}</div>
+      <div class="pad" style="position:relative;align-items:center;text-align:center;justify-content:center">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
+          <div style="width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--accent-dim));display:flex;align-items:center;justify-content:center;margin-bottom:30px;box-shadow:0 0 60px rgba(var(--accent-rgb),.5)">
+            <svg width="60" height="60" viewBox="0 0 56 56"><path d="M14 29 L24 39 L42 18" fill="none" stroke="#0D0D0D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h2 style="font-size:28px;font-weight:900;margin:0 0 10px;letter-spacing:-.02em">Congratulations!</h2>
+          <p style="font-size:16px;color:var(--t2);margin:0 0 32px">You are now our client</p>
+          <div class="card" style="width:100%;display:flex;flex-direction:column;gap:14px;text-align:left">
+            <div class="kv"><span class="k">Account number</span><span class="v mono">${esc(S.account.number)}</span></div>
+            <div class="kv"><span class="k">Login</span><span class="v">${esc(S.login)||'bobur.karimov'}</span></div>
+            <div class="kv"><span class="k">Registered</span><span class="v">${niceDate()}</span></div>
+          </div>
+        </div>
+        <div class="btnstack" style="width:100%">
+          <button class="btn" data-act="login">Go to Login</button>
+          <button class="btn ghost" data-act="dl">Download your documents</button>
+        </div>
+      </div>
+    </div>`;
+  },
+  mount(){
+    app.querySelector('[data-act=login]').onclick = ()=>{ S.history=[]; go('login',{replace:true}); };
+    app.querySelector('[data-act=dl]').onclick = ()=> toast('Documents would download here');
+  }
+};
+
+/* ---- 12. Login ---- */
+screens.login = {
+  html(){ return `
+    <div class="pad">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin:22px 0 40px">
+        <div style="width:56px;height:56px;border-radius:16px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:var(--deep)">B</div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.22em">BANK NAME</div>
+      </div>
+      <h2 class="title sm">Welcome back</h2>
+      <p class="sub">Sign in to activate your account</p>
+      <div class="field" style="margin-bottom:18px">
+        <div class="label">Login</div>
+        <div class="input-shell" id="sh-lg"><input id="in-lg" autocomplete="username" placeholder="Your login"></div>
+      </div>
+      <div class="field" style="margin-bottom:14px">
+        <div class="label">Password<button class="linkbtn" id="tg" style="font-size:12px;color:var(--t4)">Show</button></div>
+        <div class="input-shell" id="sh-pw"><input id="in-pw" type="password" autocomplete="current-password" placeholder="Your password"></div>
+      </div>
+      <div style="text-align:right;font-size:13px;color:var(--accent);font-weight:600;margin-bottom:26px;cursor:pointer">Forgot password?</div>
+      <button class="btn" id="signin" disabled>Sign In</button>
+      <div class="spring"></div>
+      <div style="text-align:center;font-size:14px;color:var(--t2)">New here?
+        <button class="linkbtn" data-act="new" style="font-size:14px">Become a Client</button></div>
+    </div>`; },
+  mount(){
+    const lg=app.querySelector('#in-lg'), pw=app.querySelector('#in-pw'), btn=app.querySelector('#signin');
+    lg.value = S.login || 'bobur.karimov';
+    [ [lg,'sh-lg'],[pw,'sh-pw'] ].forEach(([el,id])=>{ const sh=app.querySelector('#'+id);
+      el.addEventListener('focus',()=>sh.classList.add('focus')); el.addEventListener('blur',()=>sh.classList.remove('focus')); });
+    app.querySelector('#tg').onclick=()=>{ const t=pw.type==='password'; pw.type=t?'text':'password'; app.querySelector('#tg').textContent=t?'Hide':'Show'; };
+    const upd=()=> btn.disabled = !(lg.value.trim() && pw.value.length>=1);
+    lg.addEventListener('input',upd); pw.addEventListener('input',upd); upd();
+    app.querySelector('[data-act=new]').onclick=()=>{ freshState(); go('identify',{replace:true}); };
+    btn.onclick=()=>{ screens.otp.purpose='login'; S.otp={attempts:3,cooldown:60,value:''}; go('loginOtp'); };
+  }
+};
+
+/* ---- Login OTP (reuses otp screen with login purpose) ---- */
+screens.loginOtp = {
+  html(){
+    const cells = Array.from({length:6}).map((_,i)=>`<input class="pin" data-i="${i}" inputmode="numeric" maxlength="1" autocomplete="off">`).join('');
+    return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin:6px 0 30px">
+        <div style="width:56px;height:56px;border-radius:16px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:26px">🔒</div></div>
+      <h2 class="title sm" style="text-align:center">Confirm it's you</h2>
+      <p class="sub" style="text-align:center">Code sent to +998 ${fmtPhone(S.phone)||'90 123 45 67'}</p>
+      <div class="pins" id="pins">${cells}</div>
+      <div id="otp-msg"></div>
+      <div class="resend" id="resend-line">Resend in <b id="cd">1:00</b></div>
+      <div class="spring"></div>
+      <div class="notice info"><span style="font-size:16px">✓</span>
+        <div style="align-self:center">After verification, your account will be activated.</div></div>
+    </div>`;
+  },
+  mount(){ screens.otp.purpose='login'; screens.otp.mount.call(screens.otp); }
+};
+
+/* ---- activation checking (short) ---- */
+screens.activateChecking = {
+  html(){ return `
+    <div class="pad-center">
+      <div class="orb"><div class="ring"></div><div class="core">B</div></div>
+      <h2 class="title sm">Activating your account…</h2>
+      <p class="sub">Almost there</p>
+    </div>`; },
+  mount(){ later(()=> go('activated',{replace:true}), 1600); }
+};
+
+/* ---- 13. Activation modal over dashboard ---- */
+screens.activated = {
+  html(){ return `
+    <div style="position:relative;height:100%">
+      <div class="dash" id="dash">
+        <div class="greet"><div><div style="font-size:15px;color:var(--t3)">Good afternoon,</div>
+          <div style="font-size:22px;font-weight:800;margin-top:2px">Bobur K.</div></div><div class="av"></div></div>
+        <div class="balcard">
+          <div style="font-size:13px;color:var(--t3);margin-bottom:8px">Total balance</div>
+          <div style="font-size:28px;font-weight:800;font-family:var(--mono)">0.00 <span style="font-size:16px;color:var(--t3)">UZS</span></div>
+          <div style="font-size:13px;color:var(--t4);margin-top:8px;font-family:var(--mono)">${esc(S.account?S.account.number:'2020 8600 •••• 4418')}</div>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <div class="tile"><div style="font-size:22px;margin-bottom:6px">↑</div><div style="font-size:13px;color:var(--t2)">Transfer</div></div>
+          <div class="tile"><div style="font-size:22px;margin-bottom:6px">≡</div><div style="font-size:13px;color:var(--t2)">Payments</div></div>
+        </div>
+        <div class="tile" style="display:flex;align-items:center;gap:12px"><div style="font-size:20px">🧾</div><div style="font-size:14px;color:var(--t2)">Statements &amp; history</div></div>
+      </div>
+      <div class="dim" id="dim"></div>
+      <div class="modal" id="modal">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px">
+          <div style="width:64px;height:64px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:16px">🎉</div>
+          <h3 style="font-size:22px;font-weight:800;margin:0;letter-spacing:-.01em">Your account is now active!</h3>
+        </div>
+        <div class="card" style="padding:16px 18px;margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:14px;font-weight:600;font-family:var(--mono)">${esc(S.account?S.account.number:'2020 8600 •••• 4418')}</span>
+            <span class="badge active">● ACTIVE</span></div>
+        </div>
+        <div style="font-size:12px;color:var(--t4);font-weight:600;margin-bottom:12px">YOUR LIMITS</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px">
+          <div class="kv"><span style="font-size:14px;color:var(--t2)">Daily transfer limit</span><span class="v">50 000 000 UZS</span></div>
+          <div class="kv"><span style="font-size:14px;color:var(--t2)">Monthly limit</span><span class="v">500 000 000 UZS</span></div>
+          <div class="kv"><span style="font-size:14px;color:var(--t2)">International transfers</span><span class="v" style="color:var(--warn)">Restricted</span></div>
+        </div>
+        <button class="btn" style="height:52px;margin-bottom:12px" data-act="got">Got it, let's go!</button>
+        <div style="text-align:center;font-size:14px;color:var(--accent);font-weight:600;cursor:pointer">Learn more about limits</div>
+      </div>
+    </div>`; },
+  mount(){
+    const dim=app.querySelector('#dim'), modal=app.querySelector('#modal'), dash=app.querySelector('#dash');
+    dash.style.filter='brightness(.4)';
+    app.querySelector('[data-act=got]').onclick=()=>{
+      dim.remove(); modal.remove(); dash.style.transition='filter .5s'; dash.style.filter='none';
+      later(()=> showFinishToast(), 400);
+    };
+  }
+};
+
+function showFinishToast(){
+  toast('🎉 Onboarding complete — welcome to BANK NAME');
+}
+
+/* ---- tiny toast ---- */
+function toast(msg){
+  const host = app.querySelector('.dash') ? app : app;
+  const el = document.createElement('div');
+  el.textContent = msg;
+  el.style.cssText = `position:absolute;left:16px;right:16px;bottom:26px;z-index:200;background:rgba(26,26,26,.95);
+    border:1px solid var(--border);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--t2);text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.5);animation:ob-up .3s ease`;
+  const screenEl = document.querySelector('.screen');
+  screenEl.appendChild(el);
+  setTimeout(()=>{ el.style.transition='opacity .3s, transform .3s'; el.style.opacity='0'; el.style.transform='translateY(10px)'; }, 2600);
+  setTimeout(()=> el.remove(), 3000);
+}
+
+/* ============================================================
+   Registry resolver
+   ============================================================ */
+function fmtInn(v){ const d=String(v).replace(/\D/g,''); return d.length>=9? `${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,9)}` : d; }
+function resolveCompany(inn){
+  const d = String(inn).replace(/\D/g,'');
+  if(d==='000000000') return { result:'notfound' };
+  if(d==='301220907') return { result:'liquidated', name:'OOO STAR SAVDO', innFmt:fmtInn(d),
+    reg:'02 Feb 2016', liq:'19 Aug 2023' };
+  // default active company
+  return {
+    result:'active',
+    name:'OOO DIGITAL SAVDO',
+    innFmt: fmtInn(d.length===9? d : '305512418'),
+    addr:'Tashkent, Yunusabad, Amir Temur 108',
+    reg:'14 March 2021',
+    director: DIRECTOR
+  };
+}
+function niceDate(){
+  const d=new Date(); const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${d.getDate()} ${M[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+
+/* ============================================================
+   THEME ENGINE — live palette switching via CSS variables
+   ============================================================ */
+const PRIMARY_PALETTE = [
+  {n:'Green',  c:'#00FF88'}, {n:'Red',    c:'#FF2A44'}, {n:'Blue',  c:'#3B82F6'},
+  {n:'Cyan',   c:'#00D4FF'}, {n:'Purple', c:'#A855F7'}, {n:'Pink',  c:'#FF2D9B'},
+  {n:'Orange', c:'#FF8A00'}, {n:'Gold',   c:'#FFC300'}, {n:'Lime',  c:'#B4FF39'},
+  {n:'White',  c:'#F2F2F2'}
+];
+const SECONDARY_PALETTE = [
+  {n:'Charcoal', c:'#141414'}, {n:'Black', c:'#0A0A0A'}, {n:'Navy',   c:'#0E1626'},
+  {n:'Forest',   c:'#0F1B14'}, {n:'Maroon',c:'#1D0F14'}, {n:'Plum',   c:'#170F1D'},
+  {n:'Slate',    c:'#121A20'}, {n:'Teal',  c:'#0A1A1A'}, {n:'Espresso',c:'#1A1410'},
+  {n:'Indigo',   c:'#12122E'}
+];
+const hex2rgb = h => { const n=parseInt(h.slice(1),16); return [n>>16&255, n>>8&255, n&255]; };
+const rgb2hex = ([r,g,b]) => '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
+const shade = (h,f) => rgb2hex(hex2rgb(h).map(v=> f>=0 ? v+(255-v)*f : v*(1+f))); // f>0 lighten, f<0 darken
+
+const THEME = { primary:'#FF2A44', secondary:'#141414' };
+function applyTheme(){
+  const r = document.documentElement.style;
+  const p = THEME.primary, s = THEME.secondary;
+  const [pr,pg,pb] = hex2rgb(p);
+  const dim = shade(p, -0.24), [dr,dg,db] = hex2rgb(dim);
+  r.setProperty('--accent', p);
+  r.setProperty('--accent-rgb', `${pr},${pg},${pb}`);
+  r.setProperty('--accent-dim', dim);
+  r.setProperty('--accent-dim-rgb', `${dr},${dg},${db}`);
+  r.setProperty('--accent-soft', `rgba(${pr},${pg},${pb},.12)`);
+  r.setProperty('--bg', s);
+  r.setProperty('--deep', shade(s, -0.45));
+  r.setProperty('--surface', shade(s, 0.035));
+  r.setProperty('--border', shade(s, 0.10));
+  r.setProperty('--border-2', shade(s, 0.17));
+  r.setProperty('--page', shade(s, -0.55));
+  paintSwatches();
+}
+function paintSwatches(){
+  const mk = (host, list, key) => {
+    if(!host) return;
+    host.innerHTML = '';
+    list.forEach(item=>{
+      const b = document.createElement('div');
+      b.className = 'sw' + (THEME[key]===item.c ? ' on':'');
+      b.style.background = item.c;
+      b.title = item.n;
+      b.onclick = ()=>{ THEME[key]=item.c; applyTheme(); };
+      host.appendChild(b);
+    });
+  };
+  mk(document.getElementById('sw-primary'),   PRIMARY_PALETTE,   'primary');
+  mk(document.getElementById('sw-secondary'), SECONDARY_PALETTE, 'secondary');
+}
+applyTheme();
+
+/* ---- boot ---- */
+render();
+</script>
+</body>
+</html>
