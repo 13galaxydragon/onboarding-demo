@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>BANK NAME · Corporate Onboarding</title>
+<title>BANK NAME · Onboarding &amp; Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -344,6 +344,134 @@ p.sub{font-size:15px; color:var(--t3); margin:0 0 26px; line-height:1.45}
   .notch{display:none}
   .homebar{display:none}
 }
+
+/* ============================================================
+   HUB (settings + mode picker) & CALCULATOR — merged module
+   ============================================================ */
+.hub-logo{width:56px;height:56px;border-radius:17px;background:var(--accent);color:var(--deep);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:27px;
+  box-shadow:0 8px 28px rgba(var(--accent-rgb),.32)}
+.hub-sec{margin-bottom:24px}
+.hub-sec>.h{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t5);
+  font-weight:700;margin-bottom:9px}
+.hub-sec>.d{font-size:12px;color:var(--t5);line-height:1.5;margin:-4px 0 10px}
+.hub-presets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hub-preset{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:12px;
+  background:var(--surface);border:1px solid var(--border);cursor:pointer;
+  font-size:12px;font-weight:600;color:var(--t2);min-width:0;transition:border-color .15s}
+.hub-preset:hover{border-color:var(--border-2)}
+.hub-preset.on{border-color:var(--accent);color:#fff;background:var(--accent-soft)}
+.hub-preset .pv{width:20px;height:20px;border-radius:50%;flex:0 0 auto;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.hub-preset .pn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hub-mode{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:16px;
+  background:var(--surface);border:1px solid var(--border);cursor:pointer;text-align:left;
+  width:100%;font-family:var(--ff);transition:border-color .18s,transform .12s}
+.hub-mode:hover{border-color:var(--accent);transform:translateY(-1px)}
+.hub-mode .mi{width:44px;height:44px;border-radius:13px;background:var(--accent-soft);
+  color:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.hub-mode .mt{font-size:16px;font-weight:700;color:#fff}
+.hub-mode .md{font-size:12.5px;color:var(--t4);line-height:1.45;margin-top:3px}
+.hub-mode .ma{color:var(--t5);font-size:20px;align-self:center}
+
+/* --- calculator --- */
+.c-tabs{display:flex;gap:5px;background:var(--surface);border:1px solid var(--border);
+  border-radius:13px;padding:4px;margin-bottom:20px}
+.c-tab{flex:1;border:none;background:none;border-radius:10px;padding:10px 6px;cursor:pointer;
+  font-family:var(--ff);font-size:13px;font-weight:700;color:var(--t4);transition:all .18s;line-height:1.25}
+.c-tab small{display:block;font-size:10px;font-weight:500;opacity:.8;margin-top:2px}
+.c-tab.on{background:var(--accent);color:var(--deep)}
+.c-lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;
+  color:var(--t4);font-weight:600;margin-bottom:7px}
+.c-lbl .u{font-size:11px;color:var(--t6);font-weight:500}
+.c-lbl .i{width:16px;height:16px;border-radius:50%;border:1px solid var(--border-2);background:none;
+  color:var(--t5);font:700 9px var(--ff);cursor:pointer;flex:0 0 auto}
+.c-lbl .i:hover{border-color:var(--accent);color:var(--accent)}
+.c-tip{display:none;font-size:12px;line-height:1.5;color:var(--t4);background:var(--surface);
+  border-left:2px solid var(--accent);border-radius:0 10px 10px 0;padding:9px 12px;margin-top:8px}
+.c-tip.on{display:block}
+.c-rng{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:none;
+  margin-top:4px;cursor:pointer}
+.c-rng::-webkit-slider-runnable-track{height:5px;border-radius:3px;
+  background:linear-gradient(90deg,var(--accent) var(--f,0%),var(--border) var(--f,0%))}
+.c-rng::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;
+  margin-top:-6px;background:var(--accent);border:3px solid var(--bg);
+  box-shadow:0 0 0 1px var(--accent)}
+.c-rng::-moz-range-track{height:5px;border-radius:3px;background:var(--border)}
+.c-rng::-moz-range-progress{height:5px;border-radius:3px;background:var(--accent)}
+.c-rng::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--accent);
+  border:3px solid var(--bg);box-shadow:0 0 0 1px var(--accent)}
+.c-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.c-chip{border:1px solid var(--border);background:var(--surface);color:var(--t4);
+  font:600 12px var(--ff);padding:7px 11px;border-radius:999px;cursor:pointer;transition:all .15s}
+.c-chip:hover{border-color:var(--border-2);color:var(--t2)}
+.c-chip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.c-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 16px}
+.c-toggle .tt{font-size:14px;font-weight:600}
+.c-toggle .td{font-size:11.5px;color:var(--t5);margin-top:2px}
+.c-sw{position:relative;width:46px;height:26px;flex:0 0 auto;cursor:pointer}
+.c-sw input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.c-sw .tr{position:absolute;inset:0;border-radius:999px;background:var(--border);transition:background .2s}
+.c-sw .th{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  background:var(--t3);transition:transform .2s,background .2s}
+.c-sw input:checked+.tr{background:var(--accent)}
+.c-sw input:checked+.tr .th{transform:translateX(20px);background:var(--deep)}
+.c-res{position:relative;background:linear-gradient(150deg,rgba(var(--accent-rgb),.09),var(--surface));
+  border:1px solid var(--border);border-radius:18px;padding:20px;margin-top:4px}
+.c-res .rk{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--t5);font-weight:700}
+.c-big{font-size:30px;font-weight:900;letter-spacing:-.02em;color:var(--accent);margin-top:6px;
+  font-variant-numeric:tabular-nums;line-height:1.05}
+.c-big span{font-size:14px;font-weight:600;color:var(--t4);margin-left:5px}
+.c-note{font-size:11.5px;color:var(--t5);margin-top:7px;line-height:1.45}
+.c-kvs{display:flex;flex-direction:column;gap:11px;margin-top:18px;padding-top:16px;
+  border-top:1px solid var(--border)}
+.c-bar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin-top:16px;background:var(--border)}
+.c-bar i{display:block;height:100%;transition:width .35s}
+.c-barl{display:flex;justify-content:space-between;font-size:11px;color:var(--t5);margin-top:7px}
+.c-barl b{color:var(--t2)}
+.c-cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.c-cmpb{border:1px solid var(--border);background:var(--deep);border-radius:13px;padding:11px;
+  cursor:pointer;text-align:left;font-family:var(--ff);min-width:0;transition:all .15s}
+.c-cmpb:hover{border-color:var(--border-2)}
+.c-cmpb.on{border-color:var(--accent);background:var(--accent-soft)}
+.c-cmpb .ct{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t5)}
+.c-cmpb.on .ct{color:var(--accent)}
+.c-cmpb .cv{font-size:13px;font-weight:700;color:#fff;margin-top:3px;font-variant-numeric:tabular-nums;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-cmpb .co{font-size:10.5px;color:var(--t5);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-more{width:100%;border:1px dashed var(--border);background:none;color:var(--t4);
+  font:600 12px var(--ff);padding:11px;border-radius:12px;cursor:pointer;margin-top:14px}
+.c-more:hover{border-color:var(--accent);color:var(--accent)}
+.c-sched{display:none;max-height:250px;overflow:auto;border:1px solid var(--border);
+  border-radius:12px;margin-top:10px}
+.c-sched.on{display:block}
+.c-sched table{width:100%;border-collapse:collapse;font-size:11.5px}
+.c-sched th{position:sticky;top:0;background:var(--surface);color:var(--t5);font-weight:600;
+  text-align:right;padding:8px 9px;border-bottom:1px solid var(--border);white-space:nowrap}
+.c-sched th:first-child,.c-sched td:first-child{text-align:left}
+.c-sched td{padding:7px 9px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);
+  font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--t2)}
+.c-shield{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t5);margin-top:14px}
+.c-shield .sd{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+.c-shield.warn .sd{background:var(--warn)}
+.c-shield.lock .sd{background:var(--danger)}
+.c-lock{position:absolute;inset:0;border-radius:18px;display:none;place-items:center;text-align:center;
+  background:rgba(0,0,0,.72);backdrop-filter:blur(3px);padding:18px;z-index:5}
+.c-lock.on{display:grid}
+.c-lock .lt{font-size:15px;font-weight:800;margin:8px 0 4px}
+.c-lock .ld{font-size:12px;color:var(--t4);line-height:1.5}
+.c-lock .lc{font-family:var(--mono);font-size:20px;color:var(--accent);margin-top:8px}
+.c-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+
+
+/* ---------- language switcher ---------- */
+.lng{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);
+  border-radius:11px;padding:3px}
+.lng button{flex:1;border:none;background:none;border-radius:8px;padding:8px 4px;cursor:pointer;
+  font-family:var(--ff);font-size:12px;font-weight:700;color:var(--t4);transition:all .15s}
+.lng button.on{background:var(--accent);color:var(--deep)}
+
 </style>
 </head>
 <body>
@@ -391,7 +519,13 @@ p.sub{font-size:15px; color:var(--t3); margin:0 0 26px; line-height:1.45}
     <div class="sw-row" id="sw-secondary"></div>
   </div>
   <div class="grp">
-    <h4>▸ How to walk the flow</h4>
+    <h4>▸ Two demo scenarios</h4>
+        The first screen is the settings hub: pick a bank theme, then choose
+        <b style="color:#fff">Corporate onboarding</b> or the
+        <b style="color:#fff">Deposit &amp; loan calculator</b>. The theme applies to both.
+      </div>
+      <div class="grp">
+        <h4>▸ How to walk the flow</h4>
     Tap <b style="color:#fff">Become a Client</b> and follow each step. Verification codes arrive as a
     simulated SMS banner at the top of the phone — the code is shown there.
   </div>
@@ -438,7 +572,7 @@ const CODE = "123456";
 let S = {};
 function freshState(){
   S = {
-    screen:'welcome', lang:'UZ', history:[],
+    screen:'hub', lang:'RU', history:[],
     phone:'', inn:'',
     company:null,
     otp:{ attempts:3, cooldown:0, value:'' },
@@ -453,6 +587,8 @@ function freshState(){
     ],
     signedTime:{},
     loginPass:'',
+    calc:{ tab:'dep', amount:100000000, term:60, rate:20, cap:false,
+           price:100000000, down:20000000, lterm:36, lrate:24, type:'ann', open:false },
   };
 }
 freshState();
@@ -505,12 +641,13 @@ function back(){
   const prev = S.history.pop();
   if(prev){ clearTimers(); smsEl.classList.remove('in'); S.screen = prev; render(); }
 }
-function restart(){ freshState(); go('welcome', {replace:true}); }
+function restart(){ freshState(); go('hub', {replace:true}); }
 function render(){
   const scr = screens[S.screen];
   app.innerHTML = scr.html();
   app.scrollTop = 0;
   if(scr.mount) scr.mount();
+  translate(app);
 }
 
 /* ============================================================
@@ -550,7 +687,7 @@ screens.welcome = {
   mount(){
     app.querySelector('[data-act=start]').onclick = ()=> go('identify');
     app.querySelector('[data-act=signin]').onclick = ()=> { S.history=[]; go('login',{replace:true}); };
-    app.querySelectorAll('[data-lang]').forEach(el=> el.onclick=()=>{ S.lang=el.dataset.lang; render(); });
+    app.querySelectorAll('[data-lang]').forEach(el=> el.onclick=()=> setLang(el.dataset.lang));
   }
 };
 
@@ -1543,16 +1680,32 @@ function niceDate(){
    THEME ENGINE — live palette switching via CSS variables
    ============================================================ */
 const PRIMARY_PALETTE = [
-  {n:'Green',  c:'#00FF88'}, {n:'Red',    c:'#FF2A44'}, {n:'Blue',  c:'#3B82F6'},
-  {n:'Cyan',   c:'#00D4FF'}, {n:'Purple', c:'#A855F7'}, {n:'Pink',  c:'#FF2D9B'},
-  {n:'Orange', c:'#FF8A00'}, {n:'Gold',   c:'#FFC300'}, {n:'Lime',  c:'#B4FF39'},
-  {n:'White',  c:'#F2F2F2'}
+  {n:'Emerald · demo',    c:'#22C55E'}, {n:'Agrobank green',   c:'#008C3F'},
+  {n:'Alif neon',         c:'#00D264'}, {n:'NBU blue',         c:'#005BAC'},
+  {n:'TBC cyan',          c:'#00AEEF'}, {n:'SQB deep blue',    c:'#0B4EA2'},
+  {n:'Uzum violet',       c:'#7C3AED'}, {n:'Kapitalbank red',  c:'#E31E24'},
+  {n:'Hamkor orange',     c:'#F58220'}, {n:'Tenge gold',       c:'#FFD200'}
 ];
 const SECONDARY_PALETTE = [
-  {n:'Charcoal', c:'#141414'}, {n:'Black', c:'#0A0A0A'}, {n:'Navy',   c:'#0E1626'},
-  {n:'Forest',   c:'#0F1B14'}, {n:'Maroon',c:'#1D0F14'}, {n:'Plum',   c:'#170F1D'},
-  {n:'Slate',    c:'#121A20'}, {n:'Teal',  c:'#0A1A1A'}, {n:'Espresso',c:'#1A1410'},
-  {n:'Indigo',   c:'#12122E'}
+  {n:'Forest',   c:'#0F1B14'}, {n:'Charcoal', c:'#141414'}, {n:'True black', c:'#0A0A0A'},
+  {n:'Navy',     c:'#0E1626'}, {n:'Deep sea', c:'#0A1524'}, {n:'Plum',       c:'#170F1D'},
+  {n:'Maroon',   c:'#1D0F14'}, {n:'Slate',    c:'#121A20'}, {n:'Teal',       c:'#0A1A1A'},
+  {n:'Espresso', c:'#1A1410'}
+];
+/* готовые темы под банки и МФО Узбекистана (цвета приближены к фирменным) */
+const BANK_PRESETS = [
+  {n:'Black & Green', p:'#22C55E', s:'#0F1B14'},
+  {n:'NBU',           p:'#005BAC', s:'#0E1626'},
+  {n:'Agrobank',      p:'#008C3F', s:'#0F1B14'},
+  {n:'SQB',           p:'#0B4EA2', s:'#0A1524'},
+  {n:'Hamkorbank',    p:'#005DAA', s:'#0E1626'},
+  {n:'Kapitalbank',   p:'#E31E24', s:'#1D0F14'},
+  {n:'TBC Bank UZ',   p:'#00AEEF', s:'#0A1524'},
+  {n:'Anorbank',      p:'#E0263C', s:'#1D0F14'},
+  {n:'Uzum Bank',     p:'#7C3AED', s:'#170F1D'},
+  {n:'Ipoteka · OTP', p:'#52AE30', s:'#0F1B14'},
+  {n:'Tenge Bank',    p:'#00A651', s:'#0A1A1A'},
+  {n:'Alif · MFO',    p:'#00D264', s:'#0A0A0A'}
 ];
 const hex2rgb = h => { const n=parseInt(h.slice(1),16); return [n>>16&255, n>>8&255, n&255]; };
 const rgb2hex = ([r,g,b]) => '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
@@ -1592,11 +1745,862 @@ function paintSwatches(){
   };
   mk(document.getElementById('sw-primary'),   PRIMARY_PALETTE,   'primary');
   mk(document.getElementById('sw-secondary'), SECONDARY_PALETTE, 'secondary');
+  mk(document.getElementById('hub-sw-primary'),   PRIMARY_PALETTE,   'primary');
+  mk(document.getElementById('hub-sw-secondary'), SECONDARY_PALETTE, 'secondary');
+  paintPresets();
 }
 applyTheme();
 
+
+
+/* ============================================================
+   I18N — UZ / RU / EN
+   Translation happens on the rendered DOM: templates stay in
+   English, every text node + placeholder/title is looked up.
+   ============================================================ */
+const DICT = {
+  ru:{
+    /* hub */
+    "BANK NAME":"BANK NAME",
+    "Demo stand · settings & scenarios":"Демо-стенд · настройки и сценарии",
+    "Bank & MFO themes · Uzbekistan":"Темы банков и МФО · Узбекистан",
+    "Colours approximate each brand's identity — confirm exact hex in the client's brandbook.":"Цвета приближены к фирменным — точные значения уточните в брендбуке клиента.",
+    "Primary colour (accent)":"Основной цвет (акцент)",
+    "Secondary colour (background)":"Дополнительный цвет (фон)",
+    "Interface language":"Язык интерфейса",
+    "What do you want to show?":"Что показываем?",
+    "Corporate onboarding":"Корпоративный онбординг",
+    "9 steps: registry check, OTP, MYID, credentials, e-signature, documents.":"9 шагов: реестр, SMS-код, MYID, логин и пароль, ЭЦП, документы.",
+    "Deposit & loan calculator":"Калькулятор вклада и кредита",
+    "Up to 1 bn UZS, annuity vs differentiated schedule, anti-fraud limits.":"До 1 млрд сум, аннуитет и дифференцированный график, антифрод.",
+    /* calculator */
+    "Calculator":"Калькулятор",
+    "Estimate a deposit or a loan in UZS.":"Расчёт вклада или кредита в сумах.",
+    "Deposit":"Вклад","Loan":"Кредит","UZS":"сум",
+    "you save · bank pays you":"вы кладёте — банк платит вам",
+    "bank lends · you repay":"банк даёт — вы возвращаете",
+    "Deposit amount":"Сумма вклада","max 1 000 000 000 UZS":"максимум 1 000 000 000 сум",
+    "Term":"Срок","1–120 months":"1–120 месяцев","Annual rate":"Годовая ставка",
+    "Compound interest":"Капитализация процентов",
+    "monthly interest is added to the deposit":"проценты ежемесячно прибавляются к вкладу",
+    "Purchase price":"Стоимость покупки","Down payment":"Первоначальный взнос",
+    "Loan term":"Срок кредита","Loan amount":"Сумма кредита",
+    "Down payment must be lower than the price":"Взнос должен быть меньше стоимости",
+    "The part you pay upfront from your own money. The loan covers only the rest — a bigger down payment means a smaller monthly payment and less interest. A deposit has no down payment: you simply place the whole amount.":"Часть стоимости, которую вы платите сразу своими деньгами. Кредит оформляется только на остаток: чем больше взнос, тем меньше платёж и переплата. У вклада взноса нет — вы размещаете всю сумму.",
+    "Monthly income":"Доход в месяц","Average monthly income":"Средний доход в месяц",
+    "Deposited":"Вложено","Balance at maturity":"Итог на счёте","Income":"Доход",
+    "Monthly payment · annuity":"Платёж в месяц · аннуитет",
+    "First payment · differentiated":"Первый платёж · дифференцированный",
+    "Monthly payment":"Платёж в месяц",
+    "Annuity":"Аннуитет","Differentiated":"Дифференцированный",
+    "Total interest":"Переплата","Total repaid":"Всего выплатите",
+    "Principal":"Тело кредита","Interest":"Переплата",
+    "reduce the down payment: it must be lower than the price":"уменьшите взнос — он должен быть меньше стоимости",
+    "Show monthly schedule":"Показать график по месяцам","Hide monthly schedule":"Скрыть график",
+    "Mo":"Мес.","Accrued":"Начислено","Balance":"На счёте","Paid out":"Выплачено",
+    "Payment":"Платёж",
+    "Anti-fraud protection active":"Антифрод-защита активна",
+    "High request rate":"Высокая частота запросов","Paused by anti-fraud":"Пауза антифрода",
+    "Session blocked · bot detected":"Сессия заблокирована · обнаружен бот",
+    "Too many requests":"Слишком много запросов",
+    "Calculations paused by anti-fraud.":"Расчёты приостановлены антифродом.",
+    /* onboarding */
+    "Open your business account":"Откройте счёт для бизнеса",
+    "Fast, secure, fully digital":"Быстро, безопасно, полностью онлайн",
+    "Become a Client":"Стать клиентом","Already a client?":"Уже клиент?",
+    "Sign in":"Войти","Sign In":"Войти","New here?":"Впервые здесь?",
+    "Enter your details":"Введите данные",
+    "We'll verify your company against the state registry.":"Мы проверим компанию по государственному реестру.",
+    "Phone number":"Номер телефона","Uzbek mobile number":"Мобильный номер Узбекистана",
+    "INN / PINFL":"ИНН / ПИНФЛ","Enter INN or PINFL":"Введите ИНН или ПИНФЛ",
+    "9 digits (INN) or 14 digits (PINFL)":"9 цифр (ИНН) или 14 цифр (ПИНФЛ)",
+    "INN is 9 digits, PINFL is 14":"ИНН — 9 цифр, ПИНФЛ — 14",
+    "Continue":"Продолжить","Identification":"Идентификация","Verification":"Подтверждение",
+    "Company data":"Данные компании","Identity":"Личность","Credentials":"Учётные данные",
+    "Account":"Счёт","Signature":"Подпись","Documents":"Документы","Done":"Готово",
+    "You're already with us":"Вы уже наш клиент",
+    "already has an BANK NAME account. You can sign in instead.":"уже имеет счёт в BANK NAME. Вы можете просто войти.",
+    "A company with INN":"Компания с ИНН","Use a different INN":"Указать другой ИНН",
+    "Enter verification code":"Введите код подтверждения",
+    "Invalid code":"Неверный код","Resend code":"Отправить код повторно",
+    "Resend in":"Повтор через","Didn't get it?":"Не пришёл код?",
+    "Change number":"Изменить номер","Session blocked":"Сессия заблокирована",
+    "Maximum verification attempts reached. For your security, this session has been blocked.":"Исчерпаны попытки ввода кода. В целях безопасности сессия заблокирована.",
+    "Try again in 24 hours or contact support.":"Повторите через 24 часа или обратитесь в поддержку.",
+    "Contact support":"Связаться с поддержкой","Back to start":"В начало",
+    "Verifying your company data…":"Проверяем данные компании…",
+    "This may take a few seconds":"Это займёт несколько секунд",
+    "Phone verified":"Телефон подтверждён","Checking company registry":"Проверяем реестр компаний",
+    "Preparing your profile":"Готовим ваш профиль",
+    "Company not found":"Компания не найдена",
+    "was found in the state registry. Check the number or contact support.":"не найдена в государственном реестре. Проверьте номер или обратитесь в поддержку.",
+    "No company with INN":"Компания с ИНН","Change INN":"Изменить ИНН",
+    "Verify your company details":"Проверьте данные компании",
+    "Legal address":"Юридический адрес","Registered":"Дата регистрации","Director":"Директор",
+    "Liquidated":"Ликвидирована","● Active":"● Действует","● Liquidated":"● Ликвидирована",
+    "Details are correct":"Данные верны","Something is wrong":"Данные неверны",
+    "This company is liquidated and cannot open a new account. Contact support if this is an error.":"Компания ликвидирована и не может открыть счёт. Если это ошибка — обратитесь в поддержку.",
+    "What's wrong?":"Что не так?","Tell us what needs to be fixed.":"Расскажите, что нужно исправить.",
+    "Correct INN":"Исправить ИНН","Re-enter your identification number":"Ввести номер заново",
+    "Chat with our onboarding team":"Написать команде поддержки",
+    "Confirm you are the director":"Подтвердите, что вы директор",
+    "Our records show the director is":"По данным реестра директор —",
+    "We use MYID biometric verification to confirm your identity.":"Для подтверждения личности используется биометрия MYID.",
+    "WHAT TO PREPARE":"ЧТО ПОДГОТОВИТЬ","Your face for a quick scan":"Лицо для быстрого сканирования",
+    "ID document (passport)":"Документ (паспорт или ID-карта)",
+    "Start MYID Verification":"Начать проверку MYID",
+    "Hold still…":"Не двигайтесь…","Position your face inside the circle":"Поместите лицо в круг",
+    "Matching your identity…":"Сверяем личность…",
+    "Comparing with the registry director":"Сравниваем с директором из реестра",
+    "Identity verified":"Личность подтверждена","Verified name":"Подтверждённое имя",
+    "Create your credentials":"Создайте учётные данные",
+    "Choose a login":"Придумайте логин","Your login":"Ваш логин",
+    "Letters, numbers and dots":"Буквы, цифры и точки",
+    "Checking availability…":"Проверяем доступность…",
+    "This login is already taken":"Такой логин уже занят","Available":"Логин свободен",
+    "Create a password":"Придумайте пароль","Your password":"Ваш пароль",
+    "Confirm password":"Повторите пароль","Repeat your password":"Повторите пароль",
+    "Passwords don't match":"Пароли не совпадают",
+    "At least 8 characters":"Минимум 8 символов","One uppercase letter":"Одна заглавная буква",
+    "One number":"Одна цифра","One special character":"Один спецсимвол",
+    "Show":"Показать","Password":"Пароль","Login":"Логин",
+    "Your account has been created":"Счёт открыт",
+    "Account number":"Номер счёта","Valid until":"Действует до",
+    "Next: issue your digital signature":"Далее: выпуск ЭЦП",
+    "Continue to Digital Signature":"Перейти к выпуску ЭЦП",
+    "Issue your digital signature":"Выпустите электронную подпись",
+    "What is an ECP?":"Что такое ЭЦП?","Issue Digital Signature":"Выпустить ЭЦП",
+    "Generating your signature…":"Генерируем подпись…",
+    "Creating secure key pair. Don't close the app.":"Создаём ключевую пару. Не закрывайте приложение.",
+    "ECP issued successfully":"ЭЦП успешно выпущена",
+    "Your digital signature is ready. You can now sign documents.":"Электронная подпись готова. Теперь можно подписывать документы.",
+    "Sign required documents":"Подпишите документы",
+    "Not read yet":"Не прочитан","Read • ready to sign":"Прочитан · готов к подписи",
+    "Preview":"Просмотр","Sign":"Подписать","I've read it — Sign":"Прочитал — подписать",
+    "Complete Signing":"Завершить подписание","Retry signing":"Повторить подписание",
+    "Signing failed — ECP timed out":"Ошибка подписания — истекло время ЭЦП",
+    "— End of preview —":"— Конец фрагмента —",
+    "Congratulations!":"Поздравляем!","You are now our client":"Теперь вы наш клиент",
+    "Go to Login":"Перейти ко входу","Download your documents":"Скачать документы",
+    "Documents would download here":"В прототипе документы не скачиваются",
+    "Support chat is not part of this prototype":"Чат поддержки не входит в прототип",
+    "Welcome back":"С возвращением","Sign in to activate your account":"Войдите, чтобы активировать счёт",
+    "Forgot password?":"Забыли пароль?","Confirm it's you":"Подтвердите, что это вы",
+    "Activating your account…":"Активируем ваш счёт…","Almost there":"Почти готово",
+    "Your account is now active!":"Счёт активирован!",
+    "Your account will be activated after your first login and document signing.":"Счёт будет активирован после первого входа и подписания документов.",
+    "After verification, your account will be activated.":"После проверки счёт будет активирован.",
+    "Got it, let's go!":"Понятно, начнём!",
+    "Good afternoon,":"Добрый день,","Total balance":"Общий баланс",
+    "Transfer":"Перевод","Payments":"Платежи","Statements & history":"Выписки и история",
+    "YOUR LIMITS":"ВАШИ ЛИМИТЫ","Daily transfer limit":"Дневной лимит переводов",
+    "Monthly limit":"Месячный лимит","International transfers":"Международные переводы",
+    "Restricted":"Ограничено","Learn more about limits":"Подробнее о лимитах",
+    "● ACTIVE":"● АКТИВЕН","❄ FROZEN":"❄ ЗАМОРОЖЕН",
+    "🎉 Onboarding complete — welcome to BANK NAME":"🎉 Онбординг завершён — добро пожаловать в BANK NAME"
+  },
+  uz:{
+    "BANK NAME":"BANK NAME",
+    "Demo stand · settings & scenarios":"Demo stend · sozlamalar va stsenariylar",
+    "Bank & MFO themes · Uzbekistan":"Bank va MMT mavzulari · O‘zbekiston",
+    "Colours approximate each brand's identity — confirm exact hex in the client's brandbook.":"Ranglar brend uslubiga yaqinlashtirilgan — aniq qiymatlarni mijoz brendbukidan tekshiring.",
+    "Primary colour (accent)":"Asosiy rang (urg‘u)",
+    "Secondary colour (background)":"Qo‘shimcha rang (fon)",
+    "Interface language":"Interfeys tili",
+    "What do you want to show?":"Nimani ko‘rsatamiz?",
+    "Corporate onboarding":"Korporativ onboarding",
+    "9 steps: registry check, OTP, MYID, credentials, e-signature, documents.":"9 bosqich: reyestr, SMS-kod, MYID, login va parol, ERI, hujjatlar.",
+    "Deposit & loan calculator":"Omonat va kredit kalkulyatori",
+    "Up to 1 bn UZS, annuity vs differentiated schedule, anti-fraud limits.":"1 mlrd so‘mgacha, annuitet va differensial jadval, firibgarlikka qarshi himoya.",
+    "Calculator":"Kalkulyator",
+    "Estimate a deposit or a loan in UZS.":"Omonat yoki kreditni so‘mda hisoblang.",
+    "Deposit":"Omonat","Loan":"Kredit","UZS":"so‘m",
+    "you save · bank pays you":"siz qo‘yasiz — bank to‘laydi",
+    "bank lends · you repay":"bank beradi — siz qaytarasiz",
+    "Deposit amount":"Omonat summasi","max 1 000 000 000 UZS":"maksimal 1 000 000 000 so‘m",
+    "Term":"Muddat","1–120 months":"1–120 oy","Annual rate":"Yillik stavka",
+    "Compound interest":"Foizlar kapitalizatsiyasi",
+    "monthly interest is added to the deposit":"foizlar har oy omonatga qo‘shiladi",
+    "Purchase price":"Xarid qiymati","Down payment":"Boshlang‘ich to‘lov",
+    "Loan term":"Kredit muddati","Loan amount":"Kredit summasi",
+    "Down payment must be lower than the price":"Boshlang‘ich to‘lov qiymatdan kam bo‘lishi kerak",
+    "The part you pay upfront from your own money. The loan covers only the rest — a bigger down payment means a smaller monthly payment and less interest. A deposit has no down payment: you simply place the whole amount.":"Bu — o‘z mablag‘ingizdan darhol to‘laydigan qism. Kredit faqat qolgan summaga rasmiylashtiriladi: boshlang‘ich to‘lov qancha katta bo‘lsa, oylik to‘lov va ortiqcha to‘lov shuncha kam. Omonatda boshlang‘ich to‘lov yo‘q — siz butun summani joylashtirasiz.",
+    "Monthly income":"Oylik daromad","Average monthly income":"O‘rtacha oylik daromad",
+    "Deposited":"Joylashtirilgan","Balance at maturity":"Muddat oxiridagi qoldiq","Income":"Daromad",
+    "Monthly payment · annuity":"Oylik to‘lov · annuitet",
+    "First payment · differentiated":"Birinchi to‘lov · differensial",
+    "Monthly payment":"Oylik to‘lov",
+    "Annuity":"Annuitet","Differentiated":"Differensial",
+    "Total interest":"Ortiqcha to‘lov","Total repaid":"Jami to‘lanadi",
+    "Principal":"Asosiy qarz","Interest":"Ortiqcha to‘lov",
+    "reduce the down payment: it must be lower than the price":"boshlang‘ich to‘lovni kamaytiring — u qiymatdan kam bo‘lishi kerak",
+    "Show monthly schedule":"Oylik jadvalni ko‘rsatish","Hide monthly schedule":"Jadvalni yashirish",
+    "Mo":"Oy","Accrued":"Hisoblangan","Balance":"Qoldiq","Paid out":"To‘langan",
+    "Payment":"To‘lov",
+    "Anti-fraud protection active":"Firibgarlikka qarshi himoya yoqilgan",
+    "High request rate":"So‘rovlar tez-tez yuborilmoqda","Paused by anti-fraud":"Himoya tomonidan to‘xtatildi",
+    "Session blocked · bot detected":"Sessiya bloklandi · bot aniqlandi",
+    "Too many requests":"So‘rovlar juda ko‘p",
+    "Calculations paused by anti-fraud.":"Hisob-kitoblar himoya tomonidan to‘xtatildi.",
+    "Open your business account":"Biznes hisobingizni oching",
+    "Fast, secure, fully digital":"Tez, xavfsiz, to‘liq onlayn",
+    "Become a Client":"Mijoz bo‘lish","Already a client?":"Allaqachon mijozmisiz?",
+    "Sign in":"Kirish","Sign In":"Kirish","New here?":"Yangi foydalanuvchimisiz?",
+    "Enter your details":"Ma’lumotlaringizni kiriting",
+    "We'll verify your company against the state registry.":"Kompaniyangizni davlat reyestri bo‘yicha tekshiramiz.",
+    "Phone number":"Telefon raqami","Uzbek mobile number":"O‘zbekiston mobil raqami",
+    "INN / PINFL":"STIR / JSHSHIR","Enter INN or PINFL":"STIR yoki JSHSHIR kiriting",
+    "9 digits (INN) or 14 digits (PINFL)":"9 raqam (STIR) yoki 14 raqam (JSHSHIR)",
+    "INN is 9 digits, PINFL is 14":"STIR — 9 raqam, JSHSHIR — 14 raqam",
+    "Continue":"Davom etish","Identification":"Identifikatsiya","Verification":"Tasdiqlash",
+    "Company data":"Kompaniya ma’lumotlari","Identity":"Shaxs","Credentials":"Hisob ma’lumotlari",
+    "Account":"Hisob","Signature":"Imzo","Documents":"Hujjatlar","Done":"Tayyor",
+    "You're already with us":"Siz allaqachon bizning mijozimizsiz",
+    "already has an BANK NAME account. You can sign in instead.":"BANK NAME’da hisobga ega. Shunchaki tizimga kiring.",
+    "A company with INN":"STIR raqamli kompaniya","Use a different INN":"Boshqa STIR kiritish",
+    "Enter verification code":"Tasdiqlash kodini kiriting",
+    "Invalid code":"Kod noto‘g‘ri","Resend code":"Kodni qayta yuborish",
+    "Resend in":"Qayta yuborish","Didn't get it?":"Kod kelmadimi?",
+    "Change number":"Raqamni o‘zgartirish","Session blocked":"Sessiya bloklandi",
+    "Maximum verification attempts reached. For your security, this session has been blocked.":"Kod kiritish urinishlari tugadi. Xavfsizlik uchun sessiya bloklandi.",
+    "Try again in 24 hours or contact support.":"24 soatdan so‘ng urinib ko‘ring yoki qo‘llab-quvvatlashga murojaat qiling.",
+    "Contact support":"Qo‘llab-quvvatlashga murojaat","Back to start":"Boshiga qaytish",
+    "Verifying your company data…":"Kompaniya ma’lumotlari tekshirilmoqda…",
+    "This may take a few seconds":"Bu bir necha soniya oladi",
+    "Phone verified":"Telefon tasdiqlandi","Checking company registry":"Kompaniyalar reyestri tekshirilmoqda",
+    "Preparing your profile":"Profilingiz tayyorlanmoqda",
+    "Company not found":"Kompaniya topilmadi",
+    "was found in the state registry. Check the number or contact support.":"davlat reyestrida topilmadi. Raqamni tekshiring yoki qo‘llab-quvvatlashga murojaat qiling.",
+    "No company with INN":"STIR raqamli kompaniya","Change INN":"STIRni o‘zgartirish",
+    "Verify your company details":"Kompaniya ma’lumotlarini tekshiring",
+    "Legal address":"Yuridik manzil","Registered":"Ro‘yxatdan o‘tgan","Director":"Direktor",
+    "Liquidated":"Tugatilgan","● Active":"● Faol","● Liquidated":"● Tugatilgan",
+    "Details are correct":"Ma’lumotlar to‘g‘ri","Something is wrong":"Ma’lumotlar noto‘g‘ri",
+    "This company is liquidated and cannot open a new account. Contact support if this is an error.":"Kompaniya tugatilgan va yangi hisob ocha olmaydi. Bu xato bo‘lsa, qo‘llab-quvvatlashga murojaat qiling.",
+    "What's wrong?":"Nima noto‘g‘ri?","Tell us what needs to be fixed.":"Nimani tuzatish kerakligini ayting.",
+    "Correct INN":"STIRni tuzatish","Re-enter your identification number":"Raqamni qayta kiriting",
+    "Chat with our onboarding team":"Jamoamiz bilan bog‘lanish",
+    "Confirm you are the director":"Direktor ekanligingizni tasdiqlang",
+    "Our records show the director is":"Reyestr ma’lumotlariga ko‘ra direktor —",
+    "We use MYID biometric verification to confirm your identity.":"Shaxsni tasdiqlash uchun MYID biometrikasi ishlatiladi.",
+    "WHAT TO PREPARE":"NIMA TAYYORLASH KERAK","Your face for a quick scan":"Tez skanerlash uchun yuzingiz",
+    "ID document (passport)":"Hujjat (pasport yoki ID-karta)",
+    "Start MYID Verification":"MYID tekshiruvini boshlash",
+    "Hold still…":"Qimirlamang…","Position your face inside the circle":"Yuzingizni doira ichiga joylashtiring",
+    "Matching your identity…":"Shaxs solishtirilmoqda…",
+    "Comparing with the registry director":"Reyestrdagi direktor bilan solishtirilmoqda",
+    "Identity verified":"Shaxs tasdiqlandi","Verified name":"Tasdiqlangan ism",
+    "Create your credentials":"Hisob ma’lumotlarini yarating",
+    "Choose a login":"Login tanlang","Your login":"Loginingiz",
+    "Letters, numbers and dots":"Harflar, raqamlar va nuqtalar",
+    "Checking availability…":"Mavjudligi tekshirilmoqda…",
+    "This login is already taken":"Bu login band","Available":"Login bo‘sh",
+    "Create a password":"Parol yarating","Your password":"Parolingiz",
+    "Confirm password":"Parolni tasdiqlang","Repeat your password":"Parolni takrorlang",
+    "Passwords don't match":"Parollar mos kelmadi",
+    "At least 8 characters":"Kamida 8 ta belgi","One uppercase letter":"Bitta bosh harf",
+    "One number":"Bitta raqam","One special character":"Bitta maxsus belgi",
+    "Show":"Ko‘rsatish","Password":"Parol","Login":"Login",
+    "Your account has been created":"Hisob ochildi",
+    "Account number":"Hisob raqami","Valid until":"Amal qilish muddati",
+    "Next: issue your digital signature":"Keyingi qadam: ERI chiqarish",
+    "Continue to Digital Signature":"ERI chiqarishga o‘tish",
+    "Issue your digital signature":"Elektron raqamli imzo chiqaring",
+    "What is an ECP?":"ERI nima?","Issue Digital Signature":"ERI chiqarish",
+    "Generating your signature…":"Imzo yaratilmoqda…",
+    "Creating secure key pair. Don't close the app.":"Kalit juftligi yaratilmoqda. Ilovani yopmang.",
+    "ECP issued successfully":"ERI muvaffaqiyatli chiqarildi",
+    "Your digital signature is ready. You can now sign documents.":"Elektron imzoingiz tayyor. Endi hujjatlarni imzolashingiz mumkin.",
+    "Sign required documents":"Kerakli hujjatlarni imzolang",
+    "Not read yet":"O‘qilmagan","Read • ready to sign":"O‘qildi · imzolashga tayyor",
+    "Preview":"Ko‘rish","Sign":"Imzolash","I've read it — Sign":"O‘qidim — imzolayman",
+    "Complete Signing":"Imzolashni yakunlash","Retry signing":"Qayta imzolash",
+    "Signing failed — ECP timed out":"Imzolash amalga oshmadi — ERI vaqti tugadi",
+    "— End of preview —":"— Parcha tugadi —",
+    "Congratulations!":"Tabriklaymiz!","You are now our client":"Endi siz bizning mijozimizsiz",
+    "Go to Login":"Kirishga o‘tish","Download your documents":"Hujjatlarni yuklab olish",
+    "Documents would download here":"Prototipda hujjatlar yuklanmaydi",
+    "Support chat is not part of this prototype":"Qo‘llab-quvvatlash chati prototipga kirmaydi",
+    "Welcome back":"Xush kelibsiz","Sign in to activate your account":"Hisobni faollashtirish uchun kiring",
+    "Forgot password?":"Parolni unutdingizmi?","Confirm it's you":"Bu siz ekanligingizni tasdiqlang",
+    "Activating your account…":"Hisob faollashtirilmoqda…","Almost there":"Deyarli tayyor",
+    "Your account is now active!":"Hisob faollashtirildi!",
+    "Your account will be activated after your first login and document signing.":"Hisob birinchi kirish va hujjatlarni imzolashdan so‘ng faollashadi.",
+    "After verification, your account will be activated.":"Tekshiruvdan so‘ng hisob faollashadi.",
+    "Got it, let's go!":"Tushunarli, boshladik!",
+    "Good afternoon,":"Xayrli kun,","Total balance":"Umumiy qoldiq",
+    "Transfer":"O‘tkazma","Payments":"To‘lovlar","Statements & history":"Ko‘chirmalar va tarix",
+    "YOUR LIMITS":"SIZNING LIMITLARINGIZ","Daily transfer limit":"Kunlik o‘tkazma limiti",
+    "Monthly limit":"Oylik limit","International transfers":"Xalqaro o‘tkazmalar",
+    "Restricted":"Cheklangan","Learn more about limits":"Limitlar haqida batafsil",
+    "● ACTIVE":"● FAOL","❄ FROZEN":"❄ MUZLATILGAN",
+    "🎉 Onboarding complete — welcome to BANK NAME":"🎉 Onboarding yakunlandi — BANK NAME’ga xush kelibsiz"
+  }
+};
+
+/* строки с подставляемыми значениями */
+const RULES = [
+  [/^Step (\d+) of (\d+)$/,            "Шаг $1 из $2",                       "$2 dan $1-bosqich"],
+  [/^Code sent to (.+)$/,              "Код отправлен на $1",                "Kod $1 raqamiga yuborildi"],
+  [/^(\d+) attempts? left$/,           "осталось попыток: $1",               "$1 ta urinish qoldi"],
+  [/^Income over (\d+) mo$/,           "Доход за $1 мес.",                   "$1 oy uchun daromad"],
+  [/^(.+) × (.+)% ÷ 12 months$/,       "$1 × $2% ÷ 12 мес.",                 "$1 × $2% ÷ 12 oy"],
+  [/^interest is added to the deposit every month and earns interest too$/,
+                                       "проценты каждый месяц прибавляются к вкладу и тоже приносят доход",
+                                       "foizlar har oy omonatga qo‘shiladi va o‘zi ham daromad keltiradi"],
+  [/^the same payment for each of (\d+) months$/,
+                                       "одинаковый платёж каждый из $1 мес.",
+                                       "$1 oyning har birida bir xil to‘lov"],
+  [/^principal (.+) UZS\/mo \+ interest on the outstanding balance · last ≈ (.+)$/,
+                                       "тело $1 сум/мес + проценты на остаток долга · последний ≈ $2",
+                                       "asosiy qarz $1 so‘m/oy + qoldiqqa foiz · oxirgisi ≈ $2"],
+  [/^interest \+(.+) · saves (.+)$/,   "переплата +$1 · выгоднее на $2",     "ortiqcha +$1 · $2 tejaladi"],
+  [/^interest \+(.+)$/,                "переплата +$1",                      "ortiqcha to‘lov +$1"],
+  [/^from (.+)\/mo$/,                  "от $1/мес",                          "$1/oydan"],
+  [/^(.+)\/mo$/,                       "$1/мес",                             "$1/oy"],
+  [/^(\d+) \/ (\d+) per min$/,         "$1 / $2 в минуту",                   "$1 / $2 daqiqada"],
+  [/^Too many calculations — paused for (\d+)s$/,
+                                       "Слишком много расчётов — пауза $1 сек",
+                                       "Hisob-kitob juda ko‘p — $1 s pauza"],
+  [/^You're confirmed as the director of (.+)\.$/,
+                                       "Вы подтверждены как директор $1.",
+                                       "Siz $1 direktori sifatida tasdiqlandingiz."],
+  [/^Your (.+) is ready\.$/,           "$1 готов.",                          "$1 tayyor."],
+  [/^(\d+)% — creating key$/,          "$1% — создаём ключ",                 "$1% — kalit yaratilmoqda"],
+  [/^Signed (.+)$/,                    "Подписано $1",                       "Imzolandi $1"]
+];
+
+const norm = s => s.replace(/\s+/g,' ').trim();
+
+function lookup(txt){
+  const lang = S.lang;
+  if(lang === 'EN') return null;
+  const key = lang === 'RU' ? 'ru' : 'uz';
+  const k = norm(txt);
+  if(!k) return null;
+  const table = DICT[key];
+  if(table[k] !== undefined) return table[k];
+  for(const [re, ru, uz] of RULES){
+    if(re.test(k)) return k.replace(re, key === 'ru' ? ru : uz);
+  }
+  return null;
+}
+
+let trBusy = false;
+function translate(root){
+  if(!root || S.lang === 'EN') return;
+  trBusy = true;
+  try{
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(n){
+        const p = n.parentNode;
+        if(!p || p.nodeName === 'SCRIPT' || p.nodeName === 'STYLE') return NodeFilter.FILTER_REJECT;
+        return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const jobs = [];
+    while(w.nextNode()) jobs.push(w.currentNode);
+    jobs.forEach(n=>{
+      const out = lookup(n.nodeValue);
+      if(out !== null) n.nodeValue = n.nodeValue.replace(norm(n.nodeValue), out).replace(/\s+/g,' ');
+    });
+    const els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[title]') : [];
+    els.forEach(el=>{
+      ['placeholder','title'].forEach(a=>{
+        const v = el.getAttribute(a);
+        if(!v) return;
+        const out = lookup(v);
+        if(out !== null) el.setAttribute(a, out);
+      });
+    });
+  } finally { trBusy = false; }
+}
+
+/* новые узлы (bottom sheets, modals, toasts, результат калькулятора) */
+function watchTranslate(){
+  const host = document.querySelector('.screen');
+  if(!host || !window.MutationObserver) return;
+  new MutationObserver(muts=>{
+    if(trBusy || S.lang === 'EN') return;
+    muts.forEach(m=> m.addedNodes.forEach(n=>{
+      if(n.nodeType === 1) translate(n);
+      else if(n.nodeType === 3){
+        const out = lookup(n.nodeValue);
+        if(out !== null){ trBusy = true; n.nodeValue = out; trBusy = false; }
+      }
+    }));
+  }).observe(host, {childList:true, subtree:true});
+}
+
+function setLang(l){
+  S.lang = l;
+  document.documentElement.lang = l === 'RU' ? 'ru' : l === 'UZ' ? 'uz' : 'en';
+  render();
+}
+
+/* ============================================================
+   HUB — settings & mode picker (entry screen)
+   ============================================================ */
+function paintPresets(){
+  const host = document.getElementById('hub-presets');
+  if(!host) return;
+  host.innerHTML = '';
+  BANK_PRESETS.forEach(pr=>{
+    const b = document.createElement('button');
+    const on = THEME.primary===pr.p && THEME.secondary===pr.s;
+    b.className = 'hub-preset' + (on ? ' on' : '');
+    b.innerHTML = `<span class="pv" style="background:conic-gradient(${pr.p} 0 55%, ${pr.s} 55% 100%)"></span>`
+                + `<span class="pn">${pr.n}</span>`;
+    b.onclick = ()=>{ THEME.primary = pr.p; THEME.secondary = pr.s; applyTheme(); };
+    host.appendChild(b);
+  });
+}
+
+screens.hub = {
+  html(){ return `
+    <div class="pad">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin:18px 0 26px">
+        <div class="hub-logo">B</div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.22em">BANK NAME</div>
+        <div style="font-size:12px;color:var(--t5)">Demo stand · settings &amp; scenarios</div>
+      </div>
+
+      <div class="hub-sec">
+        <div class="h">Interface language</div>
+        <div class="lng" id="hub-lng">
+          ${['UZ','RU','EN'].map(l=>`<button data-l="${l}" class="${S.lang===l?'on':''}">${l==='UZ'?'O‘zbekcha':l==='RU'?'Русский':'English'}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="hub-sec">
+        <div class="h">Bank &amp; MFO themes · Uzbekistan</div>
+        <div class="d">Colours approximate each brand's identity — confirm exact hex in the client's brandbook.</div>
+        <div class="hub-presets" id="hub-presets"></div>
+      </div>
+
+      <div class="hub-sec">
+        <div class="h">Primary colour (accent)</div>
+        <div class="sw-row" id="hub-sw-primary"></div>
+        <div class="h" style="margin-top:14px">Secondary colour (background)</div>
+        <div class="sw-row" id="hub-sw-secondary"></div>
+      </div>
+
+      <div class="hub-sec">
+        <div class="h">What do you want to show?</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button class="hub-mode" data-go="welcome">
+            <span class="mi"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
+            <span style="flex:1;min-width:0">
+              <span class="mt">Corporate onboarding</span>
+              <span class="md">9 steps: registry check, OTP, MYID, credentials, e-signature, documents.</span>
+            </span>
+            <span class="ma">›</span>
+          </button>
+          <button class="hub-mode" data-go="calc">
+            <span class="mi"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v4M8 19h4"/></svg></span>
+            <span style="flex:1;min-width:0">
+              <span class="mt">Deposit &amp; loan calculator</span>
+              <span class="md">Up to 1 bn UZS, annuity vs differentiated schedule, anti-fraud limits.</span>
+            </span>
+            <span class="ma">›</span>
+          </button>
+        </div>
+      </div>
+      <div class="spring"></div>
+    </div>`;
+  },
+  mount(){
+    paintPresets(); paintSwatches();
+    app.querySelectorAll('#hub-lng button').forEach(b=>{
+      b.onclick = ()=> setLang(b.dataset.l);
+    });
+    app.querySelectorAll('[data-go]').forEach(b=>{
+      b.onclick = ()=>{ S.history = ['hub']; go(b.dataset.go); };
+    });
+  }
+};
+
+/* ============================================================
+   CALCULATOR — deposits & loans (UZS)
+   ============================================================ */
+const CALC_MAX = 1000000000;      // 1 bn UZS
+const CALC_RL  = { win:60000, max:12, lock:30000, grow:2, maxLock:300000 };
+const calcFraud = { hits:[], lockUntil:0, lockMs:CALC_RL.lock, strikes:0, hard:false, iv:null };
+
+const uzs = n => Math.round(n).toLocaleString('ru-RU').replace(/,/g,' ');
+const SHORT = {EN:[' bn',' mn'], RU:[' млрд',' млн'], UZ:[' mlrd',' mln']};
+const shortUzs = n => { const u = SHORT[S.lang] || SHORT.EN;
+  return n>=1e9 ? (Math.round(n/1e7)/100)+u[0]
+       : n>=1e6 ? (Math.round(n/1e4)/100)+u[1] : uzs(n); };
+const onlyDigits = s => String(s).replace(/[^\d]/g,'');
+const numOf = s => { const v = parseFloat(String(s).replace(/\s/g,'').replace(',','.')); return isNaN(v)?0:v; };
+const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+
+function depositMath(S0, n, rate, cap){
+  const i = rate/100/12, rows = [];
+  if(cap){
+    let bal = S0;
+    for(let k=1;k<=n;k++){ const acc = bal*i; bal += acc; rows.push({m:k,a:acc,b:bal}); }
+    const income = bal - S0;
+    return {monthly:income/n, income, total:bal, rows};
+  }
+  const monthly = S0*i; let paid = 0;
+  for(let k=1;k<=n;k++){ paid += monthly; rows.push({m:k,a:monthly,b:paid}); }
+  return {monthly, income:monthly*n, total:S0+monthly*n, rows};
+}
+function loanMath(S0, n, rate, type){
+  const i = rate/100/12, rows = [];
+  let total = 0, first, last, pay;
+  if(type==='ann'){
+    pay = i===0 ? S0/n : S0*i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1);
+    let bal = S0;
+    for(let k=1;k<=n;k++){
+      const ip = bal*i, pp = pay-ip; bal = Math.max(0, bal-pp);
+      rows.push({m:k,pay,ip,pp,bal}); total += pay;
+    }
+    first = last = pay;
+  } else {
+    const body = S0/n; let bal = S0;
+    for(let k=1;k<=n;k++){
+      const ip = bal*i, p = body+ip; bal = Math.max(0, bal-body);
+      rows.push({m:k,pay:p,ip,pp:body,bal}); total += p;
+      if(k===1) first = p; if(k===n) last = p;
+    }
+    pay = first;
+  }
+  return {pay, first, last, total, over:total-S0, rows};
+}
+
+screens.calc = {
+  html(){
+    const c = S.calc, dep = c.tab==='dep';
+    return `
+    <div class="pad">
+      <button class="back" data-act="back">‹</button>
+      <input class="c-hp" id="c-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <h2 class="title sm">Calculator</h2>
+      <p class="sub" style="margin-bottom:18px">Estimate a deposit or a loan in UZS.</p>
+
+      <div class="c-tabs">
+        <button class="c-tab ${dep?'on':''}" data-tab="dep">Deposit<small>you save · bank pays you</small></button>
+        <button class="c-tab ${dep?'':'on'}" data-tab="loan">Loan<small>bank lends · you repay</small></button>
+      </div>
+
+      <div id="c-form">${dep ? screens.calc.depForm() : screens.calc.loanForm()}</div>
+
+      <div class="c-res" id="c-res"></div>
+
+      <div class="c-shield" id="c-shield">
+        <span class="sd"></span><span id="c-shield-t">Anti-fraud protection active</span>
+        <span style="margin-left:auto" id="c-shield-c">0 / 12 per min</span>
+      </div>
+      <div class="spring" style="min-height:20px"></div>
+    </div>`;
+  },
+
+  depForm(){
+    const c = S.calc;
+    return `
+      <div class="field">
+        <div class="c-lbl"><span>Deposit amount</span><span class="u">max 1 000 000 000 UZS</span></div>
+        <div class="input-shell"><input id="d-amt" inputmode="numeric" value="${uzs(c.amount)}"><span class="prefix" style="font-size:12px;color:var(--t5)">UZS</span></div>
+        <input class="c-rng" id="d-amt-r" type="range" min="100000" max="${CALC_MAX}" step="100000" value="${c.amount}">
+        <div class="c-chips" id="d-chips">
+          ${[[10000000,'10 mn'],[50000000,'50 mn'],[100000000,'100 mn'],[500000000,'500 mn'],[CALC_MAX,'1 bn']]
+            .map(([v,l])=>`<button class="c-chip ${c.amount===v?'on':''}" data-v="${v}">${l}</button>`).join('')}
+        </div>
+      </div>
+      <div class="field">
+        <div class="c-lbl"><span>Term</span><span class="u">1–120 months</span></div>
+        <div class="input-shell"><input id="d-term" inputmode="numeric" value="${c.term}"><span class="prefix" style="font-size:12px;color:var(--t5)">mo</span></div>
+        <input class="c-rng" id="d-term-r" type="range" min="1" max="120" step="1" value="${c.term}">
+      </div>
+      <div class="field">
+        <div class="c-lbl"><span>Annual rate</span><span class="u">0.5–50 %</span></div>
+        <div class="input-shell"><input id="d-rate" inputmode="decimal" value="${c.rate}"><span class="prefix" style="font-size:12px;color:var(--t5)">% p.a.</span></div>
+        <input class="c-rng" id="d-rate-r" type="range" min="0.5" max="50" step="0.5" value="${c.rate}">
+      </div>
+      <div class="c-toggle" style="margin-bottom:20px">
+        <div><div class="tt">Compound interest</div><div class="td">monthly interest is added to the deposit</div></div>
+        <label class="c-sw"><input type="checkbox" id="d-cap" ${c.cap?'checked':''}><span class="tr"><span class="th"></span></span></label>
+      </div>`;
+  },
+
+  loanForm(){
+    const c = S.calc;
+    return `
+      <div class="field">
+        <div class="c-lbl"><span>Purchase price</span><span class="u">max 1 000 000 000 UZS</span></div>
+        <div class="input-shell"><input id="l-price" inputmode="numeric" value="${uzs(c.price)}"><span class="prefix" style="font-size:12px;color:var(--t5)">UZS</span></div>
+        <input class="c-rng" id="l-price-r" type="range" min="500000" max="${CALC_MAX}" step="100000" value="${c.price}">
+      </div>
+      <div class="field">
+        <div class="c-lbl"><span>Down payment <button class="i" id="l-i">i</button></span></div>
+        <div class="input-shell" id="l-down-sh"><input id="l-down" inputmode="numeric" value="${uzs(c.down)}"><span class="prefix" style="font-size:12px;color:var(--t5)">UZS</span></div>
+        <div class="c-chips" id="l-chips">
+          ${[0,10,20,30,50].map(p=>`<button class="c-chip" data-p="${p}">${p}%</button>`).join('')}
+        </div>
+        <div class="c-tip" id="l-tip">The part you pay upfront from your own money. The loan covers only the rest — a bigger down payment means a smaller monthly payment and less interest. A deposit has no down payment: you simply place the whole amount.</div>
+        <div class="hint err" id="l-err" style="display:none">Down payment must be lower than the price</div>
+      </div>
+      <div class="field">
+        <div class="c-lbl"><span>Loan term</span><span class="u">1–120 months</span></div>
+        <div class="input-shell"><input id="l-term" inputmode="numeric" value="${c.lterm}"><span class="prefix" style="font-size:12px;color:var(--t5)">mo</span></div>
+        <input class="c-rng" id="l-term-r" type="range" min="1" max="120" step="1" value="${c.lterm}">
+      </div>
+      <div class="field" style="margin-bottom:20px">
+        <div class="c-lbl"><span>Annual rate</span><span class="u">0.5–60 %</span></div>
+        <div class="input-shell"><input id="l-rate" inputmode="decimal" value="${c.lrate}"><span class="prefix" style="font-size:12px;color:var(--t5)">% p.a.</span></div>
+        <input class="c-rng" id="l-rate-r" type="range" min="0.5" max="60" step="0.5" value="${c.lrate}">
+      </div>`;
+  },
+
+  mount(){
+    const backBtn = app.querySelector('[data-act=back]');
+    if(backBtn) backBtn.onclick = ()=> go('hub', {replace:true});
+
+    app.querySelectorAll('[data-tab]').forEach(b=>{
+      b.onclick = ()=>{ S.calc.tab = b.dataset.tab; S.calc.open = false; go('calc', {replace:true}); };
+    });
+
+    const fill = r => r.style.setProperty('--f',
+      ((r.value - r.min) / (r.max - r.min) * 100) + '%');
+
+    const bindMoney = (inpId, rngId, key, min, max) => {
+      const inp = app.querySelector('#'+inpId), rng = app.querySelector('#'+rngId);
+      if(!inp) return;
+      const sync = v => { S.calc[key] = v; calcRender(); };
+      inp.addEventListener('input', ()=>{
+        let v = clamp(numOf(onlyDigits(inp.value)), 0, max);
+        if(rng){ rng.value = clamp(v, min, max); fill(rng); }
+        sync(v);
+      });
+      inp.addEventListener('blur', ()=>{
+        const v = clamp(numOf(onlyDigits(inp.value)) || min, key==='down'?0:min, max);
+        inp.value = uzs(v); if(rng){ rng.value = clamp(v,min,max); fill(rng); } sync(v);
+      });
+      if(rng){
+        rng.addEventListener('input', ()=>{ inp.value = uzs(+rng.value); fill(rng); sync(+rng.value); });
+        fill(rng);
+      }
+    };
+    const bindNum = (inpId, rngId, key, min, max, dec) => {
+      const inp = app.querySelector('#'+inpId), rng = app.querySelector('#'+rngId);
+      if(!inp) return;
+      inp.addEventListener('input', ()=>{
+        const raw = dec ? inp.value.replace(/[^\d.,]/g,'') : onlyDigits(inp.value);
+        if(raw !== inp.value) inp.value = raw;
+        const v = clamp(numOf(raw) || min, min, max);
+        rng.value = v; fill(rng); S.calc[key] = v; calcRender();
+      });
+      inp.addEventListener('blur', ()=>{
+        const v = clamp(numOf(inp.value) || min, min, max);
+        inp.value = dec ? String(v) : String(Math.round(v));
+        rng.value = v; fill(rng); S.calc[key] = v; calcRender();
+      });
+      rng.addEventListener('input', ()=>{
+        inp.value = rng.value; fill(rng); S.calc[key] = +rng.value; calcRender();
+      });
+      fill(rng);
+    };
+
+    if(S.calc.tab==='dep'){
+      bindMoney('d-amt','d-amt-r','amount',100000,CALC_MAX);
+      bindNum('d-term','d-term-r','term',1,120,false);
+      bindNum('d-rate','d-rate-r','rate',0.5,50,true);
+      const cap = app.querySelector('#d-cap');
+      cap.onchange = ()=>{ S.calc.cap = cap.checked; calcRender(); };
+      app.querySelectorAll('#d-chips .c-chip').forEach(ch=>{
+        ch.onclick = ()=>{
+          app.querySelectorAll('#d-chips .c-chip').forEach(x=>x.classList.remove('on'));
+          ch.classList.add('on');
+          const v = +ch.dataset.v;
+          S.calc.amount = v;
+          const inp = app.querySelector('#d-amt'), rng = app.querySelector('#d-amt-r');
+          inp.value = uzs(v); rng.value = v; fill(rng); calcRender();
+        };
+      });
+    } else {
+      bindMoney('l-price','l-price-r','price',500000,CALC_MAX);
+      bindMoney('l-down',null,'down',0,CALC_MAX);
+      bindNum('l-term','l-term-r','lterm',1,120,false);
+      bindNum('l-rate','l-rate-r','lrate',0.5,60,true);
+      app.querySelectorAll('#l-chips .c-chip').forEach(ch=>{
+        ch.onclick = ()=>{
+          app.querySelectorAll('#l-chips .c-chip').forEach(x=>x.classList.remove('on'));
+          ch.classList.add('on');
+          const v = Math.round(S.calc.price * (+ch.dataset.p) / 100);
+          S.calc.down = v;
+          app.querySelector('#l-down').value = uzs(v);
+          calcRender();
+        };
+      });
+      const tipBtn = app.querySelector('#l-i'), tip = app.querySelector('#l-tip');
+      if(tipBtn) tipBtn.onclick = ()=> tip.classList.toggle('on');
+    }
+
+    calcRender(true);
+  }
+};
+
+/* ---- anti-fraud: honeypot, synthetic events, rate limit ---- */
+function calcShield(mode, txt){
+  const el = document.getElementById('c-shield');
+  if(!el) return;
+  el.classList.remove('warn','lock');
+  if(mode) el.classList.add(mode);
+  const t = document.getElementById('c-shield-t');
+  if(t) t.textContent = txt;
+}
+function calcAllowed(){
+  if(calcFraud.hard) return false;
+  const hp = document.getElementById('c-hp');
+  if(hp && hp.value){ calcFraud.hard = true; calcShield('lock','Session blocked · bot detected'); return false; }
+  const now = Date.now();
+  if(now < calcFraud.lockUntil) return false;
+  calcFraud.hits = calcFraud.hits.filter(t => now - t < CALC_RL.win);
+  const cnt = document.getElementById('c-shield-c');
+  if(calcFraud.hits.length >= CALC_RL.max){ calcStartLock(); return false; }
+  calcFraud.hits.push(now);
+  if(cnt) cnt.textContent = calcFraud.hits.length + ' / ' + CALC_RL.max + ' per min';
+  calcShield(calcFraud.hits.length >= CALC_RL.max - 2 ? 'warn' : '',
+    calcFraud.hits.length >= CALC_RL.max - 2 ? 'High request rate' : 'Anti-fraud protection active');
+  return true;
+}
+function calcStartLock(){
+  calcFraud.lockUntil = Date.now() + calcFraud.lockMs;
+  calcShield('lock','Paused by anti-fraud');
+  toast('Too many calculations — paused for ' + Math.round(calcFraud.lockMs/1000) + 's');
+  calcFraud.lockMs = Math.min(calcFraud.lockMs * CALC_RL.grow, CALC_RL.maxLock);
+  const res = document.getElementById('c-res');
+  if(res && !res.querySelector('.c-lock')){
+    const ov = document.createElement('div');
+    ov.className = 'c-lock on';
+    ov.innerHTML = '<div><div style="font-size:24px">🛡️</div><div class="lt">Too many requests</div>'
+      + '<div class="ld">Calculations paused by anti-fraud.</div><div class="lc" id="c-cd">0:30</div></div>';
+    res.appendChild(ov);
+  }
+  clearInterval(calcFraud.iv);
+  calcFraud.iv = setInterval(()=>{
+    const left = calcFraud.lockUntil - Date.now();
+    const cd = document.getElementById('c-cd');
+    if(left <= 0){
+      clearInterval(calcFraud.iv); calcFraud.iv = null; calcFraud.hits = [];
+      const ov = document.querySelector('.c-lock'); if(ov) ov.remove();
+      calcShield('','Anti-fraud protection active');
+      calcRender(true);
+      return;
+    }
+    const s = Math.ceil(left/1000);
+    if(cd) cd.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+  }, 250);
+}
+
+let calcTimer = null;
+function calcRender(now){
+  clearTimeout(calcTimer);
+  const run = ()=>{ if(!calcAllowed()) return; calcPaint(); };
+  if(now) run(); else calcTimer = setTimeout(run, 300);
+}
+
+function calcPaint(){
+  const box = document.getElementById('c-res');
+  if(!box) return;
+  const c = S.calc;
+
+  if(c.tab === 'dep'){
+    const amt = clamp(c.amount, 100000, CALC_MAX);
+    const r = depositMath(amt, c.term, c.rate, c.cap);
+    const share = r.total>0 ? amt/r.total*100 : 100;
+    box.innerHTML = `
+      <div class="rk">${c.cap?'Average monthly income':'Monthly income'}</div>
+      <div class="c-big">${uzs(r.monthly)}<span>UZS</span></div>
+      <div class="c-note">${c.cap
+        ? 'interest is added to the deposit every month and earns interest too'
+        : uzs(amt) + ' × ' + c.rate + '% ÷ 12 months'}</div>
+      <div class="c-kvs">
+        <div class="kv"><span class="k">Deposited</span><span class="v mono">${uzs(amt)}</span></div>
+        <div class="kv"><span class="k">Income over ${c.term} mo</span><span class="v mono" style="color:var(--accent)">+${uzs(r.income)}</span></div>
+        <div class="kv"><span class="k">Balance at maturity</span><span class="v mono">${uzs(r.total)}</span></div>
+      </div>
+      <div class="c-bar"><i style="width:${share}%;background:var(--accent)"></i><i style="width:${100-share}%;background:var(--accent-dim)"></i></div>
+      <div class="c-barl"><span>Deposited <b>${shortUzs(amt)}</b></span><span>Income <b>+${shortUzs(r.income)}</b></span></div>
+      <button class="c-more" id="c-more">${c.open?'Hide':'Show'} monthly schedule</button>
+      <div class="c-sched ${c.open?'on':''}" id="c-sched"></div>`;
+    if(c.open) document.getElementById('c-sched').innerHTML =
+      '<table><thead><tr><th>Mo</th><th>Accrued</th><th>' + (c.cap?'Balance':'Paid out') + '</th></tr></thead><tbody>'
+      + r.rows.map(x=>`<tr><td>${x.m}</td><td>+${uzs(x.a)}</td><td>${uzs(x.b)}</td></tr>`).join('')
+      + '</tbody></table>';
+  } else {
+    const price = clamp(c.price, 500000, CALC_MAX);
+    const down = clamp(c.down, 0, CALC_MAX);
+    const err = document.getElementById('l-err');
+    if(down >= price){
+      if(err) err.style.display = 'block';
+      box.innerHTML = `<div class="rk">Monthly payment</div><div class="c-big">—</div>
+        <div class="c-note">reduce the down payment: it must be lower than the price</div>`;
+      return;
+    }
+    if(err) err.style.display = 'none';
+    const P = price - down;
+    const ann = loanMath(P, c.lterm, c.lrate, 'ann');
+    const dif = loanMath(P, c.lterm, c.lrate, 'dif');
+    const r = c.type === 'ann' ? ann : dif;
+    const save = ann.over - dif.over;
+    const share = r.total>0 ? P/r.total*100 : 100;
+    box.innerHTML = `
+      <div class="rk">${c.type==='ann'?'Monthly payment · annuity':'First payment · differentiated'}</div>
+      <div class="c-big">${uzs(c.type==='ann'?ann.pay:dif.first)}<span>UZS</span></div>
+      <div class="c-note">${c.type==='ann'
+        ? 'the same payment for each of ' + c.lterm + ' months'
+        : 'principal ' + uzs(P/c.lterm) + ' UZS/mo + interest on the outstanding balance · last ≈ ' + uzs(dif.last)}</div>
+      <div class="c-cmp">
+        <button class="c-cmpb ${c.type==='ann'?'on':''}" data-t="ann">
+          <div class="ct">Annuity</div>
+          <div class="cv">${uzs(ann.pay)}/mo</div>
+          <div class="co">interest +${shortUzs(ann.over)}</div>
+        </button>
+        <button class="c-cmpb ${c.type==='dif'?'on':''}" data-t="dif">
+          <div class="ct">Differentiated</div>
+          <div class="cv">from ${uzs(dif.first)}/mo</div>
+          <div class="co">interest +${shortUzs(dif.over)}${save>0?' · saves '+shortUzs(save):''}</div>
+        </button>
+      </div>
+      <div class="c-kvs">
+        <div class="kv"><span class="k">Loan amount</span><span class="v mono">${uzs(P)}</span></div>
+        <div class="kv"><span class="k">Down payment</span><span class="v mono">${uzs(down)}</span></div>
+        <div class="kv"><span class="k">Total interest</span><span class="v mono" style="color:var(--accent)">+${uzs(r.over)}</span></div>
+        <div class="kv"><span class="k">Total repaid</span><span class="v mono">${uzs(r.total)}</span></div>
+      </div>
+      <div class="c-bar"><i style="width:${share}%;background:var(--accent)"></i><i style="width:${100-share}%;background:var(--accent-dim)"></i></div>
+      <div class="c-barl"><span>Principal <b>${shortUzs(P)}</b></span><span>Interest <b>+${shortUzs(r.over)}</b></span></div>
+      <button class="c-more" id="c-more">${c.open?'Hide':'Show'} monthly schedule</button>
+      <div class="c-sched ${c.open?'on':''}" id="c-sched"></div>`;
+    box.querySelectorAll('[data-t]').forEach(b=>{
+      b.onclick = ()=>{ S.calc.type = b.dataset.t; calcPaint(); };
+    });
+    if(c.open) document.getElementById('c-sched').innerHTML =
+      '<table><thead><tr><th>Mo</th><th>Payment</th><th>Interest</th><th>Principal</th><th>Balance</th></tr></thead><tbody>'
+      + r.rows.map(x=>`<tr><td>${x.m}</td><td>${uzs(x.pay)}</td><td>${uzs(x.ip)}</td><td>${uzs(x.pp)}</td><td>${uzs(x.bal)}</td></tr>`).join('')
+      + '</tbody></table>';
+  }
+
+  const more = document.getElementById('c-more');
+  if(more) more.onclick = ()=>{ S.calc.open = !S.calc.open; calcPaint(); };
+  const cnt = document.getElementById('c-shield-c');
+  if(cnt) cnt.textContent = calcFraud.hits.length + ' / ' + CALC_RL.max + ' per min';
+}
+
+/* synthetic-event detection (bots firing dispatchEvent) */
+document.addEventListener('input', e=>{
+  if(e.isTrusted === false && ++calcFraud.strikes >= 6){
+    calcFraud.hard = true; calcShield('lock','Session blocked · bot detected');
+  }
+}, true);
+
 /* ---- boot ---- */
 render();
+watchTranslate();
 </script>
 </body>
 </html>
