@@ -6,6 +6,7 @@
 <title>BANK NAME · Onboarding &amp; Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -472,6 +473,17 @@ p.sub{font-size:15px; color:var(--t3); margin:0 0 26px; line-height:1.45}
   font-family:var(--ff);font-size:12px;font-weight:700;color:var(--t4);transition:all .15s}
 .lng button.on{background:var(--accent);color:var(--deep)}
 
+
+/* ---------- Telegram Mini App: во весь экран, без рамки телефона ---------- */
+body.in-tg{padding:0;gap:0;align-items:stretch;background:var(--bg)}
+body.in-tg .brandline,body.in-tg .notes,body.in-tg .restart,
+body.in-tg .notch,body.in-tg .homebar,body.in-tg .statusbar{display:none}
+body.in-tg .stage{gap:0;width:100%}
+body.in-tg .phone{width:100%;height:var(--tg-h,100dvh);border-radius:0;padding:0;
+  box-shadow:none;background:var(--bg)}
+body.in-tg .screen{border-radius:0}
+body.in-tg .viewport{padding-bottom:env(safe-area-inset-bottom)}
+
 </style>
 </head>
 <body>
@@ -648,6 +660,7 @@ function render(){
   app.scrollTop = 0;
   if(scr.mount) scr.mount();
   translate(app);
+  tgSyncBack();
 }
 
 /* ============================================================
@@ -1729,6 +1742,7 @@ function applyTheme(){
   r.setProperty('--border-2', shade(s, 0.17));
   r.setProperty('--page', shade(s, -0.55));
   paintSwatches();
+  if(typeof tgPaintChrome === 'function') tgPaintChrome();
 }
 function paintSwatches(){
   const mk = (host, list, key) => {
@@ -1752,6 +1766,71 @@ function paintSwatches(){
 applyTheme();
 
 
+
+
+/* ============================================================
+   TELEGRAM MINI APP INTEGRATION
+   Работает и вне Telegram: если SDK нет, всё ведёт себя как сайт.
+   ============================================================ */
+var TG = (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData !== undefined)
+  ? window.Telegram.WebApp : null;  /* var: applyTheme() может вызваться раньше этой строки */
+
+/* localStorage может быть недоступен во встроенных браузерах — безопасные обёртки */
+function lsGet(k){ try{ return window.localStorage ? localStorage.getItem(k) : null; }catch(e){ return null; } }
+function lsSet(k,v){ try{ if(window.localStorage) localStorage.setItem(k,v); }catch(e){} }
+
+function tgInit(){
+  if(!TG) return;
+  document.body.classList.add('in-tg');
+  TG.ready();
+  TG.expand();
+  if(TG.disableVerticalSwipes) TG.disableVerticalSwipes();
+  if(TG.enableClosingConfirmation) TG.enableClosingConfirmation();
+  // язык из клиента Telegram, если пользователь ещё не выбрал сам
+  const lc = (TG.initDataUnsafe && TG.initDataUnsafe.user && TG.initDataUnsafe.user.language_code) || '';
+  if(!lsGet('demo-lang')){
+    if(lc.startsWith('uz')) S.lang = 'UZ';
+    else if(lc.startsWith('ru')) S.lang = 'RU';
+    else if(lc) S.lang = 'EN';
+  }
+  TG.onEvent('themeChanged', tgPaintChrome);
+  TG.onEvent('viewportChanged', tgViewport);
+  tgViewport();
+  tgPaintChrome();
+}
+
+function tgViewport(){
+  if(!TG) return;
+  const h = TG.viewportStableHeight || TG.viewportHeight;
+  if(h) document.documentElement.style.setProperty('--tg-h', h + 'px');
+}
+
+function tgPaintChrome(){
+  if(!TG) return;
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()
+          || THEME.secondary;
+  try{
+    if(TG.setHeaderColor) TG.setHeaderColor(bg);
+    if(TG.setBackgroundColor) TG.setBackgroundColor(bg);
+  }catch(e){}
+}
+
+/* нативная кнопка «назад» в шапке Telegram */
+function tgSyncBack(){
+  if(!TG || !TG.BackButton) return;
+  if(S.screen === 'hub'){ TG.BackButton.hide(); }
+  else {
+    TG.BackButton.show();
+    TG.BackButton.offClick(tgBack);
+    TG.BackButton.onClick(tgBack);
+  }
+}
+function tgBack(){
+  if(S.history.length) back(); else go('hub', {replace:true});
+}
+function tgTap(style){
+  if(TG && TG.HapticFeedback){ try{ TG.HapticFeedback.impactOccurred(style || 'light'); }catch(e){} }
+}
 
 /* ============================================================
    I18N — UZ / RU / EN
@@ -1797,6 +1876,7 @@ const DICT = {
     "Principal":"Тело кредита","Interest":"Переплата",
     "reduce the down payment: it must be lower than the price":"уменьшите взнос — он должен быть меньше стоимости",
     "Show monthly schedule":"Показать график по месяцам","Hide monthly schedule":"Скрыть график",
+    "Send this calculation to the chat":"Отправить расчёт в чат",
     "Mo":"Мес.","Accrued":"Начислено","Balance":"На счёте","Paid out":"Выплачено",
     "Payment":"Платёж",
     "Anti-fraud protection active":"Антифрод-защита активна",
@@ -1935,6 +2015,7 @@ const DICT = {
     "Principal":"Asosiy qarz","Interest":"Ortiqcha to‘lov",
     "reduce the down payment: it must be lower than the price":"boshlang‘ich to‘lovni kamaytiring — u qiymatdan kam bo‘lishi kerak",
     "Show monthly schedule":"Oylik jadvalni ko‘rsatish","Hide monthly schedule":"Jadvalni yashirish",
+    "Send this calculation to the chat":"Hisobni chatga yuborish",
     "Mo":"Oy","Accrued":"Hisoblangan","Balance":"Qoldiq","Paid out":"To‘langan",
     "Payment":"To‘lov",
     "Anti-fraud protection active":"Firibgarlikka qarshi himoya yoqilgan",
@@ -2134,6 +2215,8 @@ function watchTranslate(){
 
 function setLang(l){
   S.lang = l;
+  lsSet('demo-lang', l);
+  tgTap();
   document.documentElement.lang = l === 'RU' ? 'ru' : l === 'UZ' ? 'uz' : 'en';
   render();
 }
@@ -2215,7 +2298,7 @@ screens.hub = {
       b.onclick = ()=> setLang(b.dataset.l);
     });
     app.querySelectorAll('[data-go]').forEach(b=>{
-      b.onclick = ()=>{ S.history = ['hub']; go(b.dataset.go); };
+      b.onclick = ()=>{ tgTap('medium'); S.history = ['hub']; go(b.dataset.go); };
     });
   }
 };
@@ -2290,6 +2373,8 @@ screens.calc = {
 
       <div class="c-res" id="c-res"></div>
 
+      <button class="btn" id="c-send" style="margin-top:14px;display:none">Send this calculation to the chat</button>
+
       <div class="c-shield" id="c-shield">
         <span class="sd"></span><span id="c-shield-t">Anti-fraud protection active</span>
         <span style="margin-left:auto" id="c-shield-c">0 / 12 per min</span>
@@ -2360,7 +2445,7 @@ screens.calc = {
     if(backBtn) backBtn.onclick = ()=> go('hub', {replace:true});
 
     app.querySelectorAll('[data-tab]').forEach(b=>{
-      b.onclick = ()=>{ S.calc.tab = b.dataset.tab; S.calc.open = false; go('calc', {replace:true}); };
+      b.onclick = ()=>{ tgTap(); S.calc.tab = b.dataset.tab; S.calc.open = false; go('calc', {replace:true}); };
     });
 
     const fill = r => r.style.setProperty('--f',
@@ -2440,6 +2525,24 @@ screens.calc = {
     }
 
     calcRender(true);
+
+    /* «полноценный вебапп»: отправка расчёта менеджеру в чат */
+    const send = app.querySelector('#c-send');
+    if(send && TG && typeof TG.sendData === 'function'){
+      send.style.display = 'flex';
+      send.onclick = ()=>{
+        tgTap('medium');
+        const c = S.calc;
+        const payload = c.tab === 'dep'
+          ? { kind:'deposit', lang:S.lang, amount:c.amount, term:c.term,
+              rate:c.rate, compound:c.cap,
+              monthly:Math.round(depositMath(c.amount,c.term,c.rate,c.cap).monthly) }
+          : { kind:'loan', lang:S.lang, price:c.price, down:c.down, term:c.lterm,
+              rate:c.lrate, type:c.type,
+              payment:Math.round(loanMath(c.price-c.down,c.lterm,c.lrate,c.type).pay) };
+        try{ TG.sendData(JSON.stringify(payload)); }catch(e){}
+      };
+    }
   }
 };
 
@@ -2599,6 +2702,8 @@ document.addEventListener('input', e=>{
 }, true);
 
 /* ---- boot ---- */
+const savedLang = lsGet('demo-lang'); if(savedLang) S.lang = savedLang;
+tgInit();
 render();
 watchTranslate();
 </script>
