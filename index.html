@@ -1772,8 +1772,15 @@ applyTheme();
    TELEGRAM MINI APP INTEGRATION
    Работает и вне Telegram: если SDK нет, всё ведёт себя как сайт.
    ============================================================ */
-var TG = (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData !== undefined)
-  ? window.Telegram.WebApp : null;  /* var: applyTheme() может вызваться раньше этой строки */
+/* SDK грузится и в обычном браузере: там initData === '' и platform === 'unknown'.
+   Поэтому проверяем признаки реального клиента, а не сам факт наличия объекта.
+   var, а не const: applyTheme() может вызваться раньше этой строки. */
+var TGW = window.Telegram && window.Telegram.WebApp;
+var TG = (TGW && (
+      (TGW.initData && TGW.initData.length > 0) ||
+      (TGW.initDataUnsafe && TGW.initDataUnsafe.user) ||
+      (TGW.platform && TGW.platform !== 'unknown')
+    )) ? TGW : null;
 
 /* localStorage может быть недоступен во встроенных браузерах — безопасные обёртки */
 function lsGet(k){ try{ return window.localStorage ? localStorage.getItem(k) : null; }catch(e){ return null; } }
